@@ -40,7 +40,7 @@ nav.scrolled{background:#141414;box-shadow:0 2px 14px rgba(0,0,0,.5);}
   transform:translateY(-100%);transition:transform .4s cubic-bezier(.77,0,.18,1);
 }
 .mobile-drawer.open{transform:translateY(0);}
-.mobile-drawer a{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.03em;color:#fff;text-decoration:none;cursor:pointer;}
+.mobile-drawer a{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.03em;color:#fff;text-decoration:n;cursor:pointer;}
 .mobile-drawer a:hover{color:var(--red);}
 
 /* HERO */
@@ -83,7 +83,7 @@ h1.title .r{color:var(--red);}
 .synopsis{font-size:1.02rem;line-height:1.7;color:var(--grey-1);max-width:600px;margin-bottom:1.5rem;}
 .synopsis strong{color:#fff;}
 .action-row{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:1.3rem;}
-.btn-play{display:inline-flex;align-items:center;gap:.6rem;background:var(--white);color:#000;font-weight:700;font-size:1.05rem;padding:.75rem 1.9rem;border:none;border-radius:4px;cursor:pointer;transition:background .2s;}
+.btn-play{display:inline-flex;align-items:center;gap:.6rem;background:var(--white);color:#000;font-weight:700;font-size:1.05rem;padding:.75rem 1.9rem;border:n;border-radius:4px;cursor:pointer;transition:background .2s;}
 .btn-play:hover{background:rgba(255,255,255,.75);}
 .btn-round{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--grey-2);background:rgba(42,42,42,.6);color:#fff;font-size:1.1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .2s,transform .2s;}
 .btn-round:hover{border-color:#fff;transform:scale(1.06);}
@@ -105,9 +105,9 @@ h1.title .r{color:var(--red);}
 .hl-header span{font-size:.72rem;color:var(--grey-2);}
 .hl-rail{
   display:flex;gap:1rem;overflow-x:auto;scroll-behavior:smooth;
-  padding:.4rem 4vw 1.6rem;scrollbar-width:none;
+  padding:.4rem 4vw 1.6rem;scrollbar-width:n;
 }
-.hl-rail::-webkit-scrollbar{display:none;}
+.hl-rail::-webkit-scrollbar{display:n;}
 .hl-card{
   flex:0 0 auto;width:260px;border-radius:8px;overflow:hidden;cursor:pointer;
   background:var(--panel);border:1px solid var(--hair);
@@ -164,14 +164,14 @@ h1.title .r{color:var(--red);}
 .rail-wrap{position:relative;}
 .rail{
   display:flex;gap:.5rem;overflow-x:auto;scroll-behavior:smooth;
-  padding:.4rem 4vw 1rem;scrollbar-width:none;
+  padding:.4rem 4vw 1rem;scrollbar-width:n;
 }
-.rail::-webkit-scrollbar{display:none;}
+.rail::-webkit-scrollbar{display:n;}
 .rail-arrow{
   position:absolute;top:0;bottom:1rem;width:52px;z-index:10;
   display:flex;align-items:center;justify-content:center;
   background:linear-gradient(90deg,rgba(20,20,20,.85),transparent);
-  border:none;color:#fff;font-size:1.4rem;cursor:pointer;opacity:0;
+  border:n;color:#fff;font-size:1.4rem;cursor:pointer;opacity:0;
   transition:opacity .2s;
 }
 .rail-wrap:hover .rail-arrow{opacity:1;}
@@ -207,7 +207,7 @@ h1.title .r{color:var(--red);}
 /* VIDEO CARDS */
 .rcard.video-card .play-ov{opacity:1;background:rgba(0,0,0,.18);}
 .rcard.video-card .play-ov i{font-size:2.1rem;}
-.rcard.video-card video{height:100%;width:100%;object-fit:cover;background:#000;display:block;pointer-events:none;}
+.rcard.video-card video{height:100%;width:100%;object-fit:cover;background:#000;display:block;pointer-events:n;}
 
 /* FRIENDS / GRID GALLERY */
 .friends-grid{
@@ -287,7 +287,7 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
   opacity:0;animation:slideUp .6s .4s forwards;
 }
 @keyframes slideUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-.player-btn{background:none;border:none;color:var(--red);font-size:1rem;cursor:pointer;transition:transform .2s;padding:0;line-height:1;}
+.player-btn{background:n;border:n;color:var(--red);font-size:1rem;cursor:pointer;transition:transform .2s;padding:0;line-height:1;}
 .player-btn:hover{transform:scale(1.2);}
 .player-label{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--grey-2);}
 .player-bars{display:flex;align-items:center;gap:2px;height:12px;}
@@ -301,7 +301,7 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;}}
 
 @media(max-width:900px){
-  .nav-links{display:none;}
+  .nav-links{display:n;}
   .hamburger{display:flex;}
   .hero{min-height:70vh;padding:0 1.2rem 2.4rem;}
   .hero.hero-sub{min-height:44vh;}
@@ -404,7 +404,7 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
         <div class="tile-body">
           <div class="tile-kicker">Issue 03 · The Feature</div>
           <div class="tile-title">Watch</div>
-          <div class="tile-sub">One story, full screen</div>
+          <div class="tile-sub"> story, full screen</div>
         </div>
       </div>
       <div class="tile" data-nav="friends">
@@ -544,7 +544,7 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
         <span><i class="bi bi-people-fill" style="color:var(--red)"></i> Friendship</span>
         <span><i class="bi bi-hd"></i> HD</span>
       </div>
-      <p class="synopsis">One video, full screen, no distractions. The moment that says it all — no captions needed, just watch.</p>
+      <p class="synopsis"> video, full screen, no distractions. The moment that says it all — no captions needed, just watch.</p>
       <div class="action-row">
         <button class="btn-play" data-nav="videos"><i class="bi bi-play-fill"></i> More Videos</button>
         <button class="btn-play" data-nav="friends"><i class="bi bi-play-fill"></i> Meet the Friends</button>
@@ -560,7 +560,7 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
     </div>
     <div class="bigvideo-caption">
       <h2>With The Squad</h2>
-      <p>The moment that says it all — no captions needed, just watch. This is the one video that sums up the whole journey.</p>
+      <p>The moment that says it all — no captions needed, just watch. This is the  video that sums up the whole journey.</p>
     </div>
   </section>
 
@@ -610,7 +610,7 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
   <section class="hero">
     <div class="hero-bg">
       <img src="assets/photos/858263594_18018391919951386_7671922315410595362_n.heic" alt="Graduation"
-           onerror="this.onerror=null;this.src='assets/photos/IMG_0903.jpg'">
+           rror="this.rror=null;this.src='assets/photos/IMG_0903.jpg'">
     </div>
     <div class="hero-scrim"></div>
     <div class="hero-content">
@@ -732,7 +732,7 @@ function buildHighlights(){
   rail.innerHTML='';
   HIGHLIGHTS.forEach((h,idx)=>{
     const card=document.createElement('div'); card.className='hl-card';
-    card.innerHTML=`<div class="hl-thumb"><span class="hl-num">${idx+1}</span><img src="${h.src}" alt="${h.title}" loading="lazy" onerror="this.closest('.hl-card').style.display='none'"></div><div class="hl-body"><h3>${h.title}</h3><p>${h.desc}</p></div>`;
+    card.innerHTML=`<div class="hl-thumb"><span class="hl-num">${idx+1}</span><img src="${h.src}" alt="${h.title}" loading="lazy" onerror="this.onerror=null;this.src='assets/photos/IMG_0903.jpg'"></div><div class="hl-body"><h3>${h.title}</h3><p>${h.desc}</p></div>`;
     card.addEventListener('click', ()=>openPhotoLb(HIGHLIGHTS, idx));
     rail.appendChild(card);
   });
