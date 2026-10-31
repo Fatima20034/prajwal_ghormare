@@ -675,7 +675,7 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
   <button class="player-btn" id="playBtn"><i class="bi bi-play-fill" id="playIcon"></i></button>
   <span class="player-label">Theme</span>
   <div class="player-bars"><span></span><span></span><span></span></div>
-  <audio id="bgAudio" loop preload="auto"><source src="assets/aj_kal_zindagi.mp3" type="audio/mpeg"></audio>
+  <audio id="bgAudio" loop preload="auto" src="assets/aj_kal_zindagi.mp3"></audio>
 </div>
 
 <script>
@@ -1062,11 +1062,14 @@ buildHighlights();
 
   audio.addEventListener("error",()=>{
     const err=audio.error;
-    const msgs={1:"Audio load aborted",2:"Network error loading audio",3:"Audio file can't be decoded",4:"Audio file not found"};
+    const msgs={1:"Audio load aborted",2:"Network error loading audio",3:"Audio file can't be decoded",4:"Audio not found: assets/aj_kal_zindagi.mp3"};
     errLabel(err?(msgs[err.code]||"Audio error"):"Audio error");
+    console.warn('Audio failed:', audio.currentSrc, err);
   });
+  audio.addEventListener("canplay",()=>{ if(label&&label.style.color){ label.textContent=defaultLabel; label.style.color=""; } });
   if(playBtn){ playBtn.addEventListener("click",()=>{
     if(audio.paused){
+      if(audio.error||audio.networkState===3){ audio.load(); }
       audio.play().then(()=>setUI(true)).catch(()=>{ setUI(false); if(label&&label.textContent===defaultLabel) errLabel("Tap again to allow audio"); });
     } else { audio.pause(); setUI(false); }
   }); }
