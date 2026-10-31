@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Prajwal Ghormare</title>
-<link rel="icon" href="data:,">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,900&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 <style>
@@ -20,7 +19,7 @@ body{background:var(--bg);color:var(--white);font-family:'Archivo',sans-serif;}
 
 /* NAV */
 nav{
-  position:fixed;top:0;left:0;right:0;z-index:400;
+  position:fixed;top:0;left:0;right:0;z-index:200;
   display:flex;align-items:center;justify-content:space-between;
   padding:1.1rem 4vw;background:linear-gradient(180deg,rgba(0,0,0,.7),transparent 100%);
   transition:background .35s ease;
@@ -165,7 +164,7 @@ h1.title .r{color:var(--red);}
 .rail-wrap{position:relative;}
 .rail{
   display:flex;gap:.5rem;overflow-x:auto;scroll-behavior:smooth;
-  padding:1.6rem 4vw 1rem;scrollbar-width:none;
+  padding:.4rem 4vw 1rem;scrollbar-width:none;
 }
 .rail::-webkit-scrollbar{display:none;}
 .rail-arrow{
@@ -308,7 +307,7 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
   .hero.hero-sub{min-height:44vh;}
   .info-col,.shelf,.strip,.cover,.rows-section,.friends-grid,.video-hero,.video-rows{padding-left:1.2rem;padding-right:1.2rem;}
   .row-head{padding:0;}
-  .rail{padding-left:0;padding-right:0;padding-top:1.2rem;}
+  .rail{padding-left:0;padding-right:0;}
   .rcard{height:220px;width:160px;}
   .rcard:hover{transform:translateY(-8px) scale(1.08);}
   .shelf-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));}
@@ -354,7 +353,7 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
         <span>·</span>
         <span>Waikato Edition</span>
       </div>
-      <h1 class="title">prajwal <span class="r">ghormare</span></h1>
+      <h1 class="title">prajwal<span class="r">ghormare</span></h1>
       <div class="match"><span class="match-pct">100% Match</span><span class="match-label">A journey worth rewatching</span></div>
       <div class="meta-row">
         <span><i class="bi bi-star-fill" style="color:#e5b711"></i> 335+ Days Later</span>
@@ -879,7 +878,7 @@ function buildVideoRows(){
     group.items.forEach(item=>{
       const idx=globalIdx++;
       const card=document.createElement('div'); card.className='rcard video-card';
-      card.innerHTML=`<video src="${item.src}#t=0.1" ${item.poster?`poster="${item.poster}"`:''} muted playsinline preload="metadata" onerror="this.closest('.rcard').style.display='none'"></video><span class="num-badge">${idx+1}</span><div class="play-ov"><i class="bi bi-play-circle-fill"></i></div><div class="card-info"><span class="ci-label"><i class="bi bi-camera-video-fill"></i>${item.title||group.label}</span></div>`;
+      card.innerHTML=`<video src="${item.src}" ${item.poster?`poster="${item.poster}"`:''} muted playsinline preload="metadata" onerror="this.closest('.rcard').style.display='none'"></video><span class="num-badge">${idx+1}</span><div class="play-ov"><i class="bi bi-play-circle-fill"></i></div><div class="card-info"><span class="ci-label"><i class="bi bi-camera-video-fill"></i>${item.title||group.label}</span></div>`;
       card.addEventListener('click', ()=>setMainVideo(item, idx, allItems.length, true));
       rail.appendChild(card);
     });
@@ -929,7 +928,7 @@ function buildFriends(){
     const card=document.createElement('div'); card.className='friend-card';
     const isVideo=f.type==='video';
     const thumbMedia = isVideo
-      ? `<video src="${f.src}#t=0.1" ${f.poster?`poster="${f.poster}"`:''} muted playsinline preload="metadata" onerror="this.closest('.friend-card').style.display='none'"></video><span class="vid-badge"><i class="bi bi-camera-video-fill"></i>Video</span>`
+      ? `<video src="${f.src}" ${f.poster?`poster="${f.poster}"`:''} muted playsinline preload="metadata" onerror="this.closest('.friend-card').style.display='none'"></video><span class="vid-badge"><i class="bi bi-camera-video-fill"></i>Video</span>`
       : `<img src="${f.src}" alt="Photo" loading="lazy" onerror="this.closest('.friend-card').style.display='none'">`;
     card.innerHTML=`<div class="friend-photo">${thumbMedia}<div class="play-ov"><i class="bi ${isVideo?'bi-play-circle-fill':'bi-arrows-angle-expand'}"></i></div></div>`;
     card.addEventListener('click', ()=>openPhotoLb(FRIENDS, idx));
