@@ -90,6 +90,12 @@ h1.title .r{color:var(--red);}
 .cast-line{font-size:.85rem;color:var(--grey-2);margin-bottom:.35rem;}
 .cast-line b{color:var(--grey-1);font-weight:500;}
 
+
+/* HERO IMAGE SHOWN IN FULL (no cropping) over a blurred copy of itself */
+.hero-bg.hero-fit::before{content:'';position:absolute;inset:-30px;background:var(--bg-img) center/cover no-repeat;filter:blur(28px) brightness(.55);}
+.hero-bg.hero-fit img{object-fit:contain;object-position:right center;}
+@media(max-width:900px){.hero-bg.hero-fit img{object-position:center top;}}
+
 /* SUB-PAGE HERO */
 .hero.hero-sub{min-height:52vh;padding-bottom:2.4rem;align-items:flex-end;}
 .hero.hero-sub .hero-content{max-width:680px;}
@@ -608,8 +614,8 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
 <!-- ============ GRADUATION ============ -->
 <div class="view" id="view-graduation">
   <section class="hero">
-    <div class="hero-bg">
-      <img src="assets/photos/858864016_18018391889951386_8283782974071566869_n (1).jpeg" alt="Graduation"
+    <div class="hero-bg hero-fit" style="--bg-img:url('assets/photos/858864016_18018391889951386_8283782974071566869_n%20(1).jpeg')">
+      <img src="assets/photos/858864016_18018391889951386_8283782974071566869_n%20(1).jpeg" alt="Graduation"
            onerror="this.onerror=null;this.src='assets/photos/IMG_0903.jpg'">
     </div>
     <div class="hero-scrim"></div>
