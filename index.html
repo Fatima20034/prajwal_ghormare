@@ -117,7 +117,7 @@ h1.title .r{color:var(--red);}
 .hl-thumb{position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;background:#050505;}
 .hl-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s;display:block;}
 .hl-card:hover .hl-thumb img{transform:scale(1.06);}
-.hl-thumb .hl-num{position:absolute;top:.5rem;left:.5rem;font-family:'Bebas Neue',sans-serif;font-size:.85rem;background:rgba(0,0,0,.55);padding:.1rem .5rem;border-radius:3px;color:var(--grey-1);}
+.hl-thumb .hl-num{position:absolute;top:.5rem;left:.5rem;z-index:2;font-family:'Bebas Neue',sans-serif;font-size:.85rem;background:rgba(0,0,0,.55);padding:.1rem .5rem;border-radius:3px;color:var(--grey-1);}
 .hl-body{padding:.9rem 1rem 1.1rem;}
 .hl-body h3{font-size:.92rem;margin-bottom:.3rem;}
 .hl-body p{font-size:.78rem;color:var(--grey-2);line-height:1.5;}
@@ -456,7 +456,7 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
       <div class="match"><span class="match-pct">100% Match</span><span class="match-label">Every moment, saved</span></div>
       <div class="meta-row">
         <span><i class="bi bi-camera-fill" style="color:#e5b711"></i> 40+ Photos</span>
-        <span><i class="bi bi-collection-fill" style="color:var(--red)"></i> Four Collections</span>
+        <span><i class="bi bi-collection-fill" style="color:var(--red)"></i> Five Collections</span>
         <span><i class="bi bi-hd"></i> HD</span>
       </div>
       <p class="synopsis">Every argument, every joke, every small moment — somehow becomes a memory worth keeping. Scroll through the collections below to relive them.</p>
@@ -718,7 +718,11 @@ hamburger.addEventListener('click', ()=>{
   mobileDrawer.classList.toggle('open', open);
 });
 
-/* ── HIGHLIGHTS ── */
+/* ── HIGHLIGHTS ──
+   Cards are never hidden. If an image fails to load, a known-good fallback
+   is shown and the broken filename is logged to the console. */
+const HL_FALLBACK = "assets/photos/IMG_0903.jpg";
+
 const HIGHLIGHTS = [
   {src:"assets/photos/451949073_2553221618198721_2744585950748598_n.jpeg", title:"Leaving Home — The Beginning", desc:"Every journey starts with one brave decision. Leaving Nagpur behind, Prajwal began a new chapter in New Zealand, carrying dreams bigger than his suitcase."},
   {src:"assets/photos/625025153_18051178838703650_6488121494698172612_n.jpg", title:"First Days at Waikato", desc:"New campus, unfamiliar faces, and countless firsts. Every lecture, every walk across campus, and every challenge slowly became part of a new routine."},
@@ -732,7 +736,12 @@ function buildHighlights(){
   rail.innerHTML='';
   HIGHLIGHTS.forEach((h,idx)=>{
     const card=document.createElement('div'); card.className='hl-card';
-    card.innerHTML=`<div class="hl-thumb"><span class="hl-num">${idx+1}</span><img src="${h.src}" alt="${h.title}" loading="lazy" onerror="this.closest('.hl-card').style.display='none'"></div><div class="hl-body"><h3>${h.title}</h3><p>${h.desc}</p></div>`;
+    card.innerHTML=`<div class="hl-thumb"><span class="hl-num">${idx+1}</span><img src="${h.src}" alt="${h.title}"></div><div class="hl-body"><h3>${h.title}</h3><p>${h.desc}</p></div>`;
+    const img=card.querySelector('img');
+    img.addEventListener('error',()=>{
+      console.warn('Highlight image failed to load:', h.src);
+      if(!img.dataset.fb){ img.dataset.fb='1'; h.src=HL_FALLBACK; img.src=HL_FALLBACK; }
+    });
     card.addEventListener('click', ()=>openPhotoLb(HIGHLIGHTS, idx));
     rail.appendChild(card);
   });
@@ -753,6 +762,11 @@ const GRADUATION_VIDEO = {src:"assets/videos/WhatsApp Video 2026-10-20 at 18.59.
 
 /* ── PHOTO GROUPS ── */
 const PHOTO_GROUPS = [
+  { label:"Leaving Nagpur — Off to NZ", items:[
+    {src:"assets/photos/Insta_Saver_@prajwal_ghormare_post_3415439504863735214_719x719_24.jpg"},
+    {src:"assets/photos/Insta_Saver_@prajwal_ghormare_post_3415439504863735214_719x719_24 (1).jpg"},
+    {src:"assets/photos/Insta_Saver_@prajwal_ghormare_post_3415439504863735214_719x719_24 (1) copy.jpg"}
+  ]},
   { label:"Early Days", items:[
     {src:"assets/photos/Insta_Saver_@prajwal_ghormare_post_3415445366940558095_1440x1440_23.jpg"},
     {src:"assets/photos/unidays1.jpg"},
@@ -912,12 +926,12 @@ const FRIENDS = [
   {src:"assets/photos/balloons with friends 3 .jpg"},
   {src:"assets/photos/horror r 2 .jpg"},
   {src:"assets/photos/horror r 3 .jpg"},
-    {src:"assets/photos/858263594_18018391919951386_7671922315410595362_n.jpeg"},
-    {src:"assets/photos/859382586_18018391934951386_6961412778196819954_n.jpeg"},
-    {src:"assets/photos/858864016_18018391889951386_8283782974071566869_n (1).jpeg"},
-    {src:"assets/photos/858840435_18018391901951386_2771562600638574738_n.jpeg"},
-    {src:"assets/photos/857774274_18018391922951386_1377867807245419369_n.jpeg"},
-    {src:"assets/photos/855485655_18018391979951386_2716281367468256143_n.jpeg"}
+  {src:"assets/photos/858263594_18018391919951386_7671922315410595362_n.jpeg"},
+  {src:"assets/photos/859382586_18018391934951386_6961412778196819954_n.jpeg"},
+  {src:"assets/photos/858864016_18018391889951386_8283782974071566869_n (1).jpeg"},
+  {src:"assets/photos/858840435_18018391901951386_2771562600638574738_n.jpeg"},
+  {src:"assets/photos/857774274_18018391922951386_1377867807245419369_n.jpeg"},
+  {src:"assets/photos/855485655_18018391979951386_2716281367468256143_n.jpeg"}
 ];
 
 function buildFriends(){
