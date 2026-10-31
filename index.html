@@ -1,325 +1,1304 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Prajwal Ghormare</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,900&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
 <style>
 :root{
-  --bg:#141414; --panel:#181818; --panel-2:#0b0b0b; --red:#e50914; --white:#fff;
-  --grey-1:rgba(255,255,255,.7); --grey-2:rgba(255,255,255,.45); --hair:rgba(255,255,255,.1);
+  --bg:#141414;
+  --panel:#181818;
+  --panel-2:#0b0b0b;
+  --red:#e50914;
+  --white:#fff;
+  --grey-1:rgba(255,255,255,.7);
+  --grey-2:rgba(255,255,255,.45);
+  --hair:rgba(255,255,255,.1);
   --green:#46d369;
 }
-*{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--bg);color:var(--white);font-family:'Archivo',sans-serif;}
-::selection{background:var(--red);color:#fff;}
-.view{display:none;} .view.active-view{display:block;}
 
-/* NAV */
+*{margin:0;padding:0;box-sizing:border-box;}
+
+html{scroll-behavior:smooth;}
+
+body{
+  background:var(--bg);
+  color:var(--white);
+  font-family:'Archivo',sans-serif;
+}
+
+::selection{background:var(--red);color:#fff;}
+
+.view{display:none;}
+.view.active-view{display:block;}
+
+/* NAVIGATION */
+
 nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:1.1rem 4vw;background:linear-gradient(180deg,rgba(0,0,0,.7),transparent 100%);
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:200;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:1.1rem 4vw;
+  background:linear-gradient(180deg,rgba(0,0,0,.7),transparent 100%);
   transition:background .35s ease;
 }
-nav.scrolled{background:#141414;box-shadow:0 2px 14px rgba(0,0,0,.5);}
-.logo{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:.04em;color:var(--red);background:none;border:none;cursor:pointer;}
-.nav-links{display:flex;gap:1.8rem;}
-.nav-links a{font-size:.85rem;color:var(--grey-1);text-decoration:none;cursor:pointer;transition:color .2s;}
-.nav-links a:hover,.nav-links a.active{color:#fff;font-weight:600;}
-.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:38px;height:38px;background:none;border:none;cursor:pointer;}
-.hamburger span{display:block;width:20px;height:2px;background:#fff;transition:.3s;}
-.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(4px,5px);}
-.hamburger.open span:nth-child(2){opacity:0;}
-.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-5px);}
-.mobile-drawer{
-  position:fixed;inset:0;z-index:300;background:rgba(10,10,10,.98);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.6rem;
-  transform:translateY(-100%);transition:transform .4s cubic-bezier(.77,0,.18,1);
+
+nav.scrolled{
+  background:#141414;
+  box-shadow:0 2px 14px rgba(0,0,0,.5);
 }
+
+.logo{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.7rem;
+  letter-spacing:.04em;
+  color:var(--red);
+  background:none;
+  border:none;
+  cursor:pointer;
+}
+
+.nav-links{
+  display:flex;
+  gap:1.8rem;
+}
+
+.nav-links a{
+  font-size:.85rem;
+  color:var(--grey-1);
+  text-decoration:none;
+  cursor:pointer;
+  transition:color .2s;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+  color:#fff;
+  font-weight:600;
+}
+
+.hamburger{
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  gap:5px;
+  width:38px;
+  height:38px;
+  background:none;
+  border:none;
+  cursor:pointer;
+}
+
+.hamburger span{
+  display:block;
+  width:20px;
+  height:2px;
+  background:#fff;
+  transition:.3s;
+}
+
+.hamburger.open span:nth-child(1){
+  transform:rotate(45deg) translate(4px,5px);
+}
+
+.hamburger.open span:nth-child(2){opacity:0;}
+
+.hamburger.open span:nth-child(3){
+  transform:rotate(-45deg) translate(4px,-5px);
+}
+
+.mobile-drawer{
+  position:fixed;
+  inset:0;
+  z-index:300;
+  background:rgba(10,10,10,.98);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:1.6rem;
+  transform:translateY(-100%);
+  transition:transform .4s cubic-bezier(.77,0,.18,1);
+}
+
 .mobile-drawer.open{transform:translateY(0);}
-.mobile-drawer a{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.03em;color:#fff;text-decoration:none;cursor:pointer;}
+
+.mobile-drawer a{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.8rem;
+  letter-spacing:.03em;
+  color:#fff;
+  text-decoration:none;
+  cursor:pointer;
+}
+
 .mobile-drawer a:hover{color:var(--red);}
 
 /* HERO */
+
 .hero{
-  position:relative;min-height:88vh;display:flex;align-items:flex-end;
-  overflow:hidden;padding:0 4vw 3.5rem;
+  position:relative;
+  min-height:88vh;
+  display:flex;
+  align-items:flex-end;
+  overflow:hidden;
+  padding:0 4vw 3.5rem;
 }
+
 .hero-bg{
-  position:absolute;inset:0;overflow:hidden;
+  position:absolute;
+  inset:0;
+  overflow:hidden;
   filter:brightness(.85) saturate(1.05);
   transform:scale(1.02);
   background-color:#0b0b0b;
 }
+
 .hero-bg video{
-  position:absolute;top:50%;left:50%;
-  min-width:100%;min-height:100%;width:auto;height:auto;
-  transform:translate(-50%,-50%);object-fit:cover;
+  position:absolute;
+  top:50%;
+  left:50%;
+  min-width:100%;
+  min-height:100%;
+  width:auto;
+  height:auto;
+  transform:translate(-50%,-50%);
+  object-fit:cover;
 }
+
 .hero-bg img{
-  position:absolute;inset:0;
-  width:100%;height:100%;object-fit:cover;
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
   object-position:center;
 }
+
 .hero-scrim{
-  position:absolute;inset:0;
+  position:absolute;
+  inset:0;
   background:
     linear-gradient(180deg,rgba(20,20,20,.1) 0%,rgba(20,20,20,0) 30%,rgba(20,20,20,.4) 70%,var(--bg) 100%),
     linear-gradient(90deg,rgba(20,20,20,.6) 0%,rgba(20,20,20,.15) 45%,rgba(20,20,20,.02) 70%);
 }
-.hero-content{position:relative;z-index:2;max-width:640px;}
-.eyebrow-row{display:flex;flex-wrap:wrap;align-items:center;gap:.7rem;font-size:.78rem;color:var(--grey-2);margin-bottom:.9rem;}
-.eyebrow-row .badge{border:1px solid var(--grey-2);padding:.1rem .5rem;font-size:.68rem;border-radius:2px;color:var(--grey-1);}
-h1.title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.6rem,7vw,5rem);line-height:.92;letter-spacing:.005em;margin-bottom:1.1rem;text-shadow:0 4px 24px rgba(0,0,0,.5);}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+  max-width:640px;
+}
+
+.eyebrow-row{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:.7rem;
+  font-size:.78rem;
+  color:var(--grey-2);
+  margin-bottom:.9rem;
+}
+
+.eyebrow-row .badge{
+  border:1px solid var(--grey-2);
+  padding:.1rem .5rem;
+  font-size:.68rem;
+  border-radius:2px;
+  color:var(--grey-1);
+}
+
+h1.title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.6rem,7vw,5rem);
+  line-height:.92;
+  letter-spacing:.005em;
+  margin-bottom:1.1rem;
+  text-shadow:0 4px 24px rgba(0,0,0,.5);
+}
+
 h1.title .r{color:var(--red);}
-.match{display:flex;align-items:center;gap:.6rem;margin-bottom:1rem;}
-.match-pct{color:var(--green);font-weight:700;font-size:1rem;}
-.match-label{font-size:.75rem;color:var(--grey-2);}
-.meta-row{display:flex;flex-wrap:wrap;gap:.9rem;font-size:.85rem;color:var(--grey-1);margin-bottom:1.4rem;}
-.meta-row span{display:flex;align-items:center;gap:.4rem;}
-.synopsis{font-size:1.02rem;line-height:1.7;color:var(--grey-1);max-width:600px;margin-bottom:1.5rem;}
+
+.match{
+  display:flex;
+  align-items:center;
+  gap:.6rem;
+  margin-bottom:1rem;
+}
+
+.match-pct{
+  color:var(--green);
+  font-weight:700;
+  font-size:1rem;
+}
+
+.match-label{
+  font-size:.75rem;
+  color:var(--grey-2);
+}
+
+.meta-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.9rem;
+  font-size:.85rem;
+  color:var(--grey-1);
+  margin-bottom:1.4rem;
+}
+
+.meta-row span{
+  display:flex;
+  align-items:center;
+  gap:.4rem;
+}
+
+.synopsis{
+  font-size:1.02rem;
+  line-height:1.7;
+  color:var(--grey-1);
+  max-width:600px;
+  margin-bottom:1.5rem;
+}
+
 .synopsis strong{color:#fff;}
-.action-row{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:1.3rem;}
-.btn-play{display:inline-flex;align-items:center;gap:.6rem;background:var(--white);color:#000;font-weight:700;font-size:1.05rem;padding:.75rem 1.9rem;border:none;border-radius:4px;cursor:pointer;transition:background .2s;}
+
+.action-row{
+  display:flex;
+  gap:.8rem;
+  flex-wrap:wrap;
+  margin-bottom:1.3rem;
+}
+
+.btn-play{
+  display:inline-flex;
+  align-items:center;
+  gap:.6rem;
+  background:var(--white);
+  color:#000;
+  font-weight:700;
+  font-size:1.05rem;
+  padding:.75rem 1.9rem;
+  border:none;
+  border-radius:4px;
+  cursor:pointer;
+  transition:background .2s;
+}
+
 .btn-play:hover{background:rgba(255,255,255,.75);}
-.btn-round{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--grey-2);background:rgba(42,42,42,.6);color:#fff;font-size:1.1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .2s,transform .2s;}
-.btn-round:hover{border-color:#fff;transform:scale(1.06);}
-.cast-line{font-size:.85rem;color:var(--grey-2);margin-bottom:.35rem;}
-.cast-line b{color:var(--grey-1);font-weight:500;}
+
+.btn-round{
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  border:1.5px solid var(--grey-2);
+  background:rgba(42,42,42,.6);
+  color:#fff;
+  font-size:1.1rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:border-color .2s,transform .2s;
+}
+
+.btn-round:hover{
+  border-color:#fff;
+  transform:scale(1.06);
+}
+
+.cast-line{
+  font-size:.85rem;
+  color:var(--grey-2);
+  margin-bottom:.35rem;
+}
+
+.cast-line b{
+  color:var(--grey-1);
+  font-weight:500;
+}
 
 /* SUB-PAGE HERO */
-.hero.hero-sub{min-height:52vh;padding-bottom:2.4rem;align-items:flex-end;}
+
+.hero.hero-sub{
+  min-height:52vh;
+  padding-bottom:2.4rem;
+  align-items:flex-end;
+}
+
 .hero.hero-sub .hero-content{max-width:680px;}
-.hero.hero-sub h1.title{font-size:clamp(2.2rem,5.5vw,3.8rem);margin-bottom:.7rem;}
-.hero.hero-sub .synopsis{margin-bottom:0;font-size:.95rem;}
+
+.hero.hero-sub h1.title{
+  font-size:clamp(2.2rem,5.5vw,3.8rem);
+  margin-bottom:.7rem;
+}
+
+.hero.hero-sub .synopsis{
+  margin-bottom:0;
+  font-size:.95rem;
+}
+
 .hero.hero-sub .cover-eyebrow{margin-bottom:.5rem;}
 
-/* HIGHLIGHT REEL */
-.info-col{padding:2.6rem 0 1rem;max-width:1300px;margin:0 auto;}
-.highlights{border-top:1px solid var(--hair);}
-.hl-header{display:flex;align-items:center;justify-content:space-between;padding:1.6rem 4vw 1rem;}
-.hl-header h2{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.03em;}
-.hl-header span{font-size:.72rem;color:var(--grey-2);}
-.hl-rail{
-  display:flex;gap:1rem;overflow-x:auto;scroll-behavior:smooth;
-  padding:.4rem 4vw 1.6rem;scrollbar-width:none;
+/* HIGHLIGHTS */
+
+.info-col{
+  padding:2.6rem 0 1rem;
+  max-width:1300px;
+  margin:0 auto;
 }
+
+.highlights{border-top:1px solid var(--hair);}
+
+.hl-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:1.6rem 4vw 1rem;
+}
+
+.hl-header h2{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.6rem;
+  letter-spacing:.03em;
+}
+
+.hl-header span{
+  font-size:.72rem;
+  color:var(--grey-2);
+}
+
+.hl-rail{
+  display:flex;
+  gap:1rem;
+  overflow-x:auto;
+  scroll-behavior:smooth;
+  padding:.4rem 4vw 1.6rem;
+  scrollbar-width:none;
+}
+
 .hl-rail::-webkit-scrollbar{display:none;}
+
 .hl-card{
-  flex:0 0 auto;width:260px;border-radius:8px;overflow:hidden;cursor:pointer;
-  background:var(--panel);border:1px solid var(--hair);
+  flex:0 0 auto;
+  width:260px;
+  border-radius:8px;
+  overflow:hidden;
+  cursor:pointer;
+  background:var(--panel);
+  border:1px solid var(--hair);
   transition:transform .3s,box-shadow .3s,border-color .3s;
 }
-.hl-card:hover{transform:translateY(-8px);box-shadow:0 20px 45px rgba(0,0,0,.55);border-color:var(--red);}
-.hl-thumb{position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;background:#050505;}
-.hl-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s;display:block;}
-.hl-card:hover .hl-thumb img{transform:scale(1.06);}
-.hl-thumb .hl-num{position:absolute;top:.5rem;left:.5rem;font-family:'Bebas Neue',sans-serif;font-size:.85rem;background:rgba(0,0,0,.55);padding:.1rem .5rem;border-radius:3px;color:var(--grey-1);}
-.hl-body{padding:.9rem 1rem 1.1rem;}
-.hl-body h3{font-size:.92rem;margin-bottom:.3rem;}
-.hl-body p{font-size:.78rem;color:var(--grey-2);line-height:1.5;}
 
-/* SHELF */
-.shelf{padding:1rem 4vw 1rem;max-width:1300px;margin:0 auto;}
-.shelf h2{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:.03em;margin-bottom:1.2rem;}
-.shelf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.2rem;}
-.tile{
-  position:relative;border-radius:8px;overflow:hidden;cursor:pointer;
-  border:1px solid var(--hair);background:linear-gradient(150deg,#222,#050505);
-  display:flex;align-items:flex-end;transition:transform .3s,box-shadow .3s;
-  aspect-ratio:2/3;height:auto;
+.hl-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 20px 45px rgba(0,0,0,.55);
+  border-color:var(--red);
 }
-.tile:hover{transform:translateY(-6px);box-shadow:0 24px 50px rgba(0,0,0,.55);border-color:var(--red);}
-.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55;transition:transform .4s;}
-.tile:hover img{transform:scale(1.06);}
-.tile::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.85),transparent 60%);}
-.tile-body{position:relative;z-index:2;padding:1.2rem 1.4rem;}
-.tile-kicker{font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--red);margin-bottom:.4rem;}
-.tile-title{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.02em;}
-.tile-sub{font-size:.8rem;color:var(--grey-1);margin-top:.3rem;}
 
-/* STATS STRIP */
-.strip{display:flex;flex-wrap:wrap;gap:2rem 3rem;justify-content:center;padding:3rem 4vw;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin-top:2rem;}
+.hl-thumb{
+  position:relative;
+  width:100%;
+  aspect-ratio:4/3;
+  overflow:hidden;
+  background:#050505;
+}
+
+.hl-thumb.image-missing{
+  background:linear-gradient(135deg,#242424,#080808);
+}
+
+.hl-thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .4s;
+  display:block;
+}
+
+.hl-card:hover .hl-thumb img{transform:scale(1.06);}
+
+.hl-thumb .hl-num{
+  position:absolute;
+  top:.5rem;
+  left:.5rem;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:.85rem;
+  background:rgba(0,0,0,.55);
+  padding:.1rem .5rem;
+  border-radius:3px;
+  color:var(--grey-1);
+  z-index:2;
+}
+
+.hl-body{padding:.9rem 1rem 1.1rem;}
+
+.hl-body h3{
+  font-size:.92rem;
+  margin-bottom:.3rem;
+}
+
+.hl-body p{
+  font-size:.78rem;
+  color:var(--grey-2);
+  line-height:1.5;
+}
+
+/* HOME SHELF */
+
+.shelf{
+  padding:1rem 4vw 1rem;
+  max-width:1300px;
+  margin:0 auto;
+}
+
+.shelf h2{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.7rem;
+  letter-spacing:.03em;
+  margin-bottom:1.2rem;
+}
+
+.shelf-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:1.2rem;
+}
+
+.tile{
+  position:relative;
+  border-radius:8px;
+  overflow:hidden;
+  cursor:pointer;
+  border:1px solid var(--hair);
+  background:linear-gradient(150deg,#222,#050505);
+  display:flex;
+  align-items:flex-end;
+  aspect-ratio:2/3;
+  height:auto;
+  transition:transform .3s,box-shadow .3s;
+}
+
+.tile:hover{
+  transform:translateY(-6px);
+  box-shadow:0 24px 50px rgba(0,0,0,.55);
+  border-color:var(--red);
+}
+
+.tile img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:.55;
+  transition:transform .4s;
+}
+
+.tile:hover img{transform:scale(1.06);}
+
+.tile::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(0deg,rgba(0,0,0,.85),transparent 60%);
+}
+
+.tile-body{
+  position:relative;
+  z-index:2;
+  padding:1.2rem 1.4rem;
+}
+
+.tile-kicker{
+  font-size:.68rem;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--red);
+  margin-bottom:.4rem;
+}
+
+.tile-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.8rem;
+  letter-spacing:.02em;
+}
+
+.tile-sub{
+  font-size:.8rem;
+  color:var(--grey-1);
+  margin-top:.3rem;
+}
+
+/* STATS */
+
+.strip{
+  display:flex;
+  flex-wrap:wrap;
+  gap:2rem 3rem;
+  justify-content:center;
+  padding:3rem 4vw;
+  border-top:1px solid var(--hair);
+  border-bottom:1px solid var(--hair);
+  margin-top:2rem;
+}
+
 .stat{text-align:center;}
-.stat b{display:block;font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--red);line-height:1;}
-.stat span{font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--grey-2);}
+
+.stat b{
+  display:block;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2.2rem;
+  color:var(--red);
+  line-height:1;
+}
+
+.stat span{
+  font-size:.68rem;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--grey-2);
+}
 
 /* COVER */
-.cover{padding:7rem 4vw 2rem;max-width:1400px;margin:0 auto;}
-.cover-eyebrow{font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:var(--red);margin-bottom:.6rem;}
-.cover-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,5.5vw,4rem);letter-spacing:.02em;line-height:.95;}
-.cover-title span{color:var(--red);}
-.cover-sub{color:var(--grey-2);font-size:.9rem;margin-top:.6rem;max-width:620px;}
 
-/* ROWS */
-.rows-section{padding:0 0 5rem;max-width:1500px;margin:0 auto;}
+.cover{
+  padding:7rem 4vw 2rem;
+  max-width:1400px;
+  margin:0 auto;
+}
+
+.cover-eyebrow{
+  font-size:.78rem;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--red);
+  margin-bottom:.6rem;
+}
+
+.cover-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.4rem,5.5vw,4rem);
+  letter-spacing:.02em;
+  line-height:.95;
+}
+
+.cover-title span{color:var(--red);}
+
+.cover-sub{
+  color:var(--grey-2);
+  font-size:.9rem;
+  margin-top:.6rem;
+  max-width:620px;
+}
+
+/* GALLERY ROWS */
+
+.rows-section{
+  padding:0 0 5rem;
+  max-width:1500px;
+  margin:0 auto;
+}
+
 .row-block{margin-bottom:2.6rem;}
-.row-head{display:flex;align-items:baseline;gap:.8rem;margin-bottom:.8rem;padding:0 4vw;}
-.row-head h3{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:.04em;font-weight:400;text-transform:uppercase;color:#e8e8e8;}
-.row-head span{font-size:.72rem;color:var(--grey-2);}
+
+.row-head{
+  display:flex;
+  align-items:baseline;
+  gap:.8rem;
+  margin-bottom:.8rem;
+  padding:0 4vw;
+}
+
+.row-head h3{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.15rem;
+  letter-spacing:.04em;
+  font-weight:400;
+  text-transform:uppercase;
+  color:#e8e8e8;
+}
+
+.row-head span{
+  font-size:.72rem;
+  color:var(--grey-2);
+}
 
 .rail-wrap{position:relative;}
+
 .rail{
-  display:flex;gap:.5rem;overflow-x:auto;scroll-behavior:smooth;
-  padding:.4rem 4vw 1rem;scrollbar-width:none;
+  display:flex;
+  gap:.5rem;
+  overflow-x:auto;
+  scroll-behavior:smooth;
+  padding:.4rem 4vw 1rem;
+  scrollbar-width:none;
 }
+
 .rail::-webkit-scrollbar{display:none;}
+
 .rail-arrow{
-  position:absolute;top:0;bottom:1rem;width:52px;z-index:10;
-  display:flex;align-items:center;justify-content:center;
+  position:absolute;
+  top:0;
+  bottom:1rem;
+  width:52px;
+  z-index:10;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   background:linear-gradient(90deg,rgba(20,20,20,.85),transparent);
-  border:none;color:#fff;font-size:1.4rem;cursor:pointer;opacity:0;
+  border:none;
+  color:#fff;
+  font-size:1.4rem;
+  cursor:pointer;
+  opacity:0;
   transition:opacity .2s;
 }
+
 .rail-wrap:hover .rail-arrow{opacity:1;}
-.rail-arrow.right{right:0;background:linear-gradient(270deg,rgba(20,20,20,.85),transparent);}
+
+.rail-arrow.right{
+  right:0;
+  background:linear-gradient(270deg,rgba(20,20,20,.85),transparent);
+}
+
 .rail-arrow.left{left:0;}
 
 .rcard{
-  flex:0 0 auto;position:relative;border-radius:4px;overflow:hidden;background:var(--panel);
-  cursor:pointer;height:320px;width:220px;max-width:420px;
-  opacity:0;transform:translateY(16px) scale(1);
+  flex:0 0 auto;
+  position:relative;
+  border-radius:4px;
+  overflow:hidden;
+  background:var(--panel);
+  cursor:pointer;
+  height:320px;
+  width:220px;
+  max-width:420px;
+  opacity:0;
+  transform:translateY(16px) scale(1);
   transition:opacity .5s,transform .28s ease,z-index 0s;
 }
-.rcard.visible{opacity:1;transform:translateY(0) scale(1);}
-.rcard img{height:100%;width:100%;object-fit:cover;background:#000;display:block;}
-.rcard .num-badge{position:absolute;top:.5rem;left:.5rem;font-family:'Bebas Neue',sans-serif;font-size:.85rem;background:rgba(0,0,0,.55);padding:.1rem .5rem;border-radius:3px;color:var(--grey-1);z-index:3;}
-.rcard .play-ov{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0);transition:background .2s;opacity:0;z-index:2;}
-.rcard .card-info{
-  position:absolute;left:0;right:0;bottom:0;padding:.6rem .7rem .55rem;
-  background:linear-gradient(0deg,rgba(0,0,0,.95) 20%,rgba(0,0,0,.6) 70%,transparent);
-  opacity:0;transform:translateY(6px);transition:opacity .2s,transform .2s;z-index:2;
+
+.rcard.visible{
+  opacity:1;
+  transform:translateY(0) scale(1);
 }
-.rcard .card-info .ci-label{font-size:.68rem;color:var(--grey-1);letter-spacing:.02em;display:flex;align-items:center;gap:.35rem;}
-.rcard .card-info .ci-label i{color:var(--red);font-size:.75rem;}
+
+.rcard img{
+  height:100%;
+  width:100%;
+  object-fit:cover;
+  background:#000;
+  display:block;
+}
+
+.rcard .num-badge{
+  position:absolute;
+  top:.5rem;
+  left:.5rem;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:.85rem;
+  background:rgba(0,0,0,.55);
+  padding:.1rem .5rem;
+  border-radius:3px;
+  color:var(--grey-1);
+  z-index:3;
+}
+
+.rcard .play-ov{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,0);
+  transition:background .2s;
+  opacity:0;
+  z-index:2;
+}
+
+.rcard .card-info{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  padding:.6rem .7rem .55rem;
+  background:linear-gradient(0deg,rgba(0,0,0,.95) 20%,rgba(0,0,0,.6) 70%,transparent);
+  opacity:0;
+  transform:translateY(6px);
+  transition:opacity .2s,transform .2s;
+  z-index:2;
+}
+
+.rcard .card-info .ci-label{
+  font-size:.68rem;
+  color:var(--grey-1);
+  letter-spacing:.02em;
+  display:flex;
+  align-items:center;
+  gap:.35rem;
+}
+
+.rcard .card-info .ci-label i{
+  color:var(--red);
+  font-size:.75rem;
+}
+
 .rcard:hover{
   transform:translateY(-14px) scale(1.12);
   box-shadow:0 24px 55px rgba(0,0,0,.65);
-  z-index:5;border-radius:6px;
+  z-index:5;
+  border-radius:6px;
 }
-.rcard:hover .play-ov{opacity:1;background:rgba(0,0,0,.15);}
-.rcard:hover .card-info{opacity:1;transform:translateY(0);}
-.rcard .play-ov i{font-size:1.6rem;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.6);}
+
+.rcard:hover .play-ov{
+  opacity:1;
+  background:rgba(0,0,0,.15);
+}
+
+.rcard:hover .card-info{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.rcard .play-ov i{
+  font-size:1.6rem;
+  color:#fff;
+  text-shadow:0 2px 8px rgba(0,0,0,.6);
+}
 
 /* VIDEO CARDS */
-.rcard.video-card .play-ov{opacity:1;background:rgba(0,0,0,.18);}
-.rcard.video-card .play-ov i{font-size:2.1rem;}
-.rcard.video-card video{height:100%;width:100%;object-fit:cover;background:#000;display:block;pointer-events:none;}
 
-/* FRIENDS / GRID GALLERY */
+.rcard.video-card .play-ov{
+  opacity:1;
+  background:rgba(0,0,0,.18);
+}
+
+.rcard.video-card .play-ov i{font-size:2.1rem;}
+
+.rcard.video-card video{
+  height:100%;
+  width:100%;
+  object-fit:cover;
+  background:#000;
+  display:block;
+  pointer-events:none;
+}
+
+/* FRIENDS AND GRADUATION GALLERY */
+
 .friends-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-  gap:1.4rem;padding:1rem 4vw 4rem;max-width:1400px;margin:0 auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:1.4rem;
+  padding:1rem 4vw 4rem;
+  max-width:1400px;
+  margin:0 auto;
 }
+
 .friend-card{
-  position:relative;border-radius:10px;overflow:hidden;cursor:pointer;
-  border:1px solid var(--hair);background:var(--panel);
+  position:relative;
+  border-radius:10px;
+  overflow:hidden;
+  cursor:pointer;
+  border:1px solid var(--hair);
+  background:var(--panel);
   transition:transform .3s,box-shadow .3s,border-color .3s;
-  opacity:0;transform:translateY(16px);
+  opacity:0;
+  transform:translateY(16px);
 }
-.friend-card.visible{opacity:1;transform:translateY(0);}
-.friend-card:hover{transform:translateY(-8px);box-shadow:0 22px 48px rgba(0,0,0,.55);border-color:var(--red);}
-.friend-photo{position:relative;width:100%;aspect-ratio:3/4;overflow:hidden;background:#050505;}
-.friend-photo img{width:100%;height:100%;object-fit:cover;transition:transform .4s;display:block;}
+
+.friend-card.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.friend-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 22px 48px rgba(0,0,0,.55);
+  border-color:var(--red);
+}
+
+.friend-photo{
+  position:relative;
+  width:100%;
+  aspect-ratio:3/4;
+  overflow:hidden;
+  background:#050505;
+}
+
+.friend-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .4s;
+  display:block;
+}
+
 .friend-card:hover .friend-photo img{transform:scale(1.06);}
-.friend-photo .play-ov{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0);transition:background .2s;opacity:0;}
-.friend-card:hover .friend-photo .play-ov{opacity:1;background:rgba(0,0,0,.15);}
-.friend-photo .play-ov i{font-size:1.6rem;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.6);}
-.friend-photo video{width:100%;height:100%;object-fit:cover;display:block;}
-.friend-photo .vid-badge{position:absolute;top:.5rem;left:.5rem;z-index:2;background:rgba(0,0,0,.55);color:#fff;font-size:.72rem;padding:.15rem .5rem;border-radius:3px;display:flex;align-items:center;gap:.3rem;}
+
+.friend-photo .play-ov{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,0);
+  transition:background .2s;
+  opacity:0;
+}
+
+.friend-card:hover .friend-photo .play-ov{
+  opacity:1;
+  background:rgba(0,0,0,.15);
+}
+
+.friend-photo .play-ov i{
+  font-size:1.6rem;
+  color:#fff;
+  text-shadow:0 2px 8px rgba(0,0,0,.6);
+}
+
+.friend-photo video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.friend-photo .vid-badge{
+  position:absolute;
+  top:.5rem;
+  left:.5rem;
+  z-index:2;
+  background:rgba(0,0,0,.55);
+  color:#fff;
+  font-size:.72rem;
+  padding:.15rem .5rem;
+  border-radius:3px;
+  display:flex;
+  align-items:center;
+  gap:.3rem;
+}
+
 .friend-photo .vid-badge i{font-size:.7rem;}
 
-/* VIDEOS PAGE */
-.video-hero{position:relative;max-width:1500px;margin:0 auto;padding:0 4vw 2.5rem;}
+/* VIDEO PAGE */
+
+.video-hero{
+  position:relative;
+  max-width:1500px;
+  margin:0 auto;
+  padding:0 4vw 2.5rem;
+}
+
 .video-hero-frame{
-  position:relative;width:100%;border-radius:10px;overflow:hidden;
-  background:#000;border:1px solid var(--hair);
+  position:relative;
+  width:100%;
+  border-radius:10px;
+  overflow:hidden;
+  background:#000;
+  border:1px solid var(--hair);
   box-shadow:0 30px 70px rgba(0,0,0,.55);
   aspect-ratio:16/9;
 }
-.video-hero-frame video{width:100%;height:100%;object-fit:contain;background:#000;display:block;}
-.video-hero-meta{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-top:1.1rem;}
-.video-hero-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.03em;}
-.video-hero-sub{font-size:.8rem;color:var(--grey-2);margin-top:.25rem;}
-.video-hero-count{font-size:.72rem;color:var(--grey-2);letter-spacing:.08em;text-transform:uppercase;}
-.video-rows{padding:0 0 5rem;max-width:1500px;margin:0 auto;}
-@media(max-width:900px){ .video-hero-frame{aspect-ratio:9/13;} }
 
-/* BIG VIDEO */
-.bigvideo-wrap{max-width:1600px;margin:0 auto;padding:0 4vw 4rem;}
+.video-hero-frame video{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  background:#000;
+  display:block;
+}
+
+.video-hero-meta{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:1rem;
+  margin-top:1.1rem;
+}
+
+.video-hero-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.6rem;
+  letter-spacing:.03em;
+}
+
+.video-hero-sub{
+  font-size:.8rem;
+  color:var(--grey-2);
+  margin-top:.25rem;
+}
+
+.video-hero-count{
+  font-size:.72rem;
+  color:var(--grey-2);
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.video-rows{
+  padding:0 0 5rem;
+  max-width:1500px;
+  margin:0 auto;
+}
+
+/* FEATURE VIDEO */
+
+.bigvideo-wrap{
+  max-width:1600px;
+  margin:0 auto;
+  padding:0 4vw 4rem;
+}
+
 .bigvideo-frame{
-  position:relative;width:100%;border-radius:12px;overflow:hidden;
-  background:#000;border:1px solid var(--hair);
+  position:relative;
+  width:100%;
+  border-radius:12px;
+  overflow:hidden;
+  background:#000;
+  border:1px solid var(--hair);
   box-shadow:0 40px 90px rgba(0,0,0,.6);
   aspect-ratio:16/9;
 }
-.bigvideo-frame video{width:100%;height:100%;object-fit:contain;background:#000;display:block;}
-.bigvideo-caption{margin-top:1.4rem;max-width:760px;}
-.bigvideo-caption h2{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.03em;margin-bottom:.5rem;}
-.bigvideo-caption p{font-size:.92rem;color:var(--grey-1);line-height:1.7;}
-@media(max-width:900px){ .bigvideo-frame{aspect-ratio:9/13;} }
+
+.bigvideo-frame video{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  background:#000;
+  display:block;
+}
+
+.bigvideo-caption{
+  margin-top:1.4rem;
+  max-width:760px;
+}
+
+.bigvideo-caption h2{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2rem;
+  letter-spacing:.03em;
+  margin-bottom:.5rem;
+}
+
+.bigvideo-caption p{
+  font-size:.92rem;
+  color:var(--grey-1);
+  line-height:1.7;
+}
 
 /* LIGHTBOX */
-.lightbox{position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.96);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s;}
-.lightbox.active{opacity:1;visibility:visible;}
-.lightbox-img{max-width:min(90vw,1050px);max-height:86vh;object-fit:contain;border-radius:6px;}
-.lightbox-video{max-width:min(90vw,1050px);max-height:86vh;border-radius:6px;background:#000;}
-.lb-close,.lb-nav{background:rgba(255,255,255,.08);border:1px solid var(--hair);color:var(--grey-1);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.25s;border-radius:50%;}
-.lb-close{position:fixed;top:1.4rem;right:1.4rem;width:44px;height:44px;font-size:1.05rem;}
-.lb-close:hover{color:#fff;border-color:var(--red);}
-.lb-nav{position:fixed;top:50%;transform:translateY(-50%);width:48px;height:48px;font-size:1.05rem;}
-.lb-nav:hover{background:var(--red);border-color:var(--red);color:#fff;}
-.lb-prev{left:1.4rem;} .lb-next{right:1.4rem;}
-.lb-counter{position:fixed;bottom:1.4rem;left:50%;transform:translateX(-50%);font-size:.72rem;letter-spacing:.1em;color:var(--grey-2);}
 
-footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
-.footer-brand{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.05em;}
+.lightbox{
+  position:fixed;
+  inset:0;
+  z-index:600;
+  background:rgba(0,0,0,.96);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .35s,visibility .35s;
+}
+
+.lightbox.active{
+  opacity:1;
+  visibility:visible;
+}
+
+.lightbox-img{
+  max-width:min(90vw,1050px);
+  max-height:86vh;
+  object-fit:contain;
+  border-radius:6px;
+}
+
+.lightbox-video{
+  max-width:min(90vw,1050px);
+  max-height:86vh;
+  border-radius:6px;
+  background:#000;
+}
+
+.lb-close,
+.lb-nav{
+  background:rgba(255,255,255,.08);
+  border:1px solid var(--hair);
+  color:var(--grey-1);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:.25s;
+  border-radius:50%;
+}
+
+.lb-close{
+  position:fixed;
+  top:1.4rem;
+  right:1.4rem;
+  width:44px;
+  height:44px;
+  font-size:1.05rem;
+}
+
+.lb-close:hover{
+  color:#fff;
+  border-color:var(--red);
+}
+
+.lb-nav{
+  position:fixed;
+  top:50%;
+  transform:translateY(-50%);
+  width:48px;
+  height:48px;
+  font-size:1.05rem;
+}
+
+.lb-nav:hover{
+  background:var(--red);
+  border-color:var(--red);
+  color:#fff;
+}
+
+.lb-prev{left:1.4rem;}
+.lb-next{right:1.4rem;}
+
+.lb-counter{
+  position:fixed;
+  bottom:1.4rem;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:.72rem;
+  letter-spacing:.1em;
+  color:var(--grey-2);
+}
+
+/* FOOTER */
+
+footer{
+  padding:2.2rem 4vw;
+  border-top:1px solid var(--hair);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:1rem;
+}
+
+.footer-brand{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.1rem;
+  letter-spacing:.05em;
+}
+
 .footer-brand span{color:var(--red);}
-.footer-sub{font-size:.72rem;letter-spacing:.1em;color:var(--grey-2);text-transform:uppercase;}
+
+.footer-sub{
+  font-size:.72rem;
+  letter-spacing:.1em;
+  color:var(--grey-2);
+  text-transform:uppercase;
+}
+
+/* BACKGROUND MUSIC PLAYER */
 
 .player{
-  position:fixed;bottom:1.5rem;right:1.5rem;z-index:200;
-  background:rgba(20,20,20,.95);border:1px solid var(--hair);border-left:3px solid var(--red);
-  display:flex;align-items:center;gap:.8rem;padding:.6rem 1.2rem;border-radius:4px;
-  opacity:0;animation:slideUp .6s .4s forwards;
+  position:fixed;
+  bottom:1.5rem;
+  right:1.5rem;
+  z-index:200;
+  background:rgba(20,20,20,.95);
+  border:1px solid var(--hair);
+  border-left:3px solid var(--red);
+  display:flex;
+  align-items:center;
+  gap:.8rem;
+  padding:.6rem 1.2rem;
+  border-radius:4px;
+  opacity:0;
+  animation:slideUp .6s .4s forwards;
 }
-@keyframes slideUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-.player-btn{background:none;border:none;color:var(--red);font-size:1rem;cursor:pointer;transition:transform .2s;padding:0;line-height:1;}
+
+@keyframes slideUp{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+.player-btn{
+  background:none;
+  border:none;
+  color:var(--red);
+  font-size:1rem;
+  cursor:pointer;
+  transition:transform .2s;
+  padding:0;
+  line-height:1;
+}
+
 .player-btn:hover{transform:scale(1.2);}
-.player-label{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--grey-2);}
-.player-bars{display:flex;align-items:center;gap:2px;height:12px;}
-.player-bars span{width:2px;background:var(--red);border-radius:1px;height:4px;transition:height .2s;}
-.player.playing .player-bars span{animation:barBounce .9s ease-in-out infinite;}
+
+.player-label{
+  font-size:.68rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--grey-2);
+}
+
+.player-bars{
+  display:flex;
+  align-items:center;
+  gap:2px;
+  height:12px;
+}
+
+.player-bars span{
+  width:2px;
+  background:var(--red);
+  border-radius:1px;
+  height:4px;
+  transition:height .2s;
+}
+
+.player.playing .player-bars span{
+  animation:barBounce .9s ease-in-out infinite;
+}
+
 .player-bars span:nth-child(1){animation-delay:0s;}
 .player-bars span:nth-child(2){animation-delay:.15s;}
 .player-bars span:nth-child(3){animation-delay:.3s;}
-@keyframes barBounce{0%,100%{height:4px;}50%{height:12px;}}
 
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;}}
+@keyframes barBounce{
+  0%,100%{height:4px;}
+  50%{height:12px;}
+}
+
+/* ACCESSIBILITY */
+
+@media(prefers-reduced-motion:reduce){
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+    scroll-behavior:auto!important;
+  }
+}
+
+/* MOBILE */
 
 @media(max-width:900px){
   .nav-links{display:none;}
   .hamburger{display:flex;}
-  .hero{min-height:70vh;padding:0 1.2rem 2.4rem;}
+
+  .hero{
+    min-height:70vh;
+    padding:0 1.2rem 2.4rem;
+  }
+
   .hero.hero-sub{min-height:44vh;}
-  .info-col,.shelf,.strip,.cover,.rows-section,.friends-grid,.video-hero,.video-rows{padding-left:1.2rem;padding-right:1.2rem;}
+
+  .info-col,
+  .shelf,
+  .strip,
+  .cover,
+  .rows-section,
+  .friends-grid,
+  .video-hero,
+  .video-rows{
+    padding-left:1.2rem;
+    padding-right:1.2rem;
+  }
+
   .row-head{padding:0;}
-  .rail{padding-left:0;padding-right:0;}
-  .rcard{height:220px;width:160px;}
-  .rcard:hover{transform:translateY(-8px) scale(1.08);}
-  .shelf-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));}
-  .friends-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem;}
-  footer{padding:1.6rem 1.2rem;flex-direction:column;text-align:center;}
+
+  .rail{
+    padding-left:0;
+    padding-right:0;
+  }
+
+  .rcard{
+    height:220px;
+    width:160px;
+  }
+
+  .rcard:hover{
+    transform:translateY(-8px) scale(1.08);
+  }
+
+  .shelf-grid{
+    grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+  }
+
+  .friends-grid{
+    grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+    gap:1rem;
+  }
+
+  .video-hero-frame,
+  .bigvideo-frame{
+    aspect-ratio:9/13;
+  }
+
+  footer{
+    padding:1.6rem 1.2rem;
+    flex-direction:column;
+    text-align:center;
+  }
+}
+
+@media(max-width:500px){
+  .action-row{gap:.55rem;}
+  .btn-play{
+    font-size:.88rem;
+    padding:.65rem 1rem;
+  }
+
+  .hl-card{width:235px;}
+
+  .lb-nav{
+    width:38px;
+    height:38px;
+  }
+
+  .lb-prev{left:.5rem;}
+  .lb-next{right:.5rem;}
+
+  .lightbox-img,
+  .lightbox-video{
+    max-width:94vw;
+    max-height:78vh;
+  }
+
+  .player{
+    right:.7rem;
+    bottom:.7rem;
+  }
 }
 </style>
 </head>
+
 <body>
+
+<!-- NAVIGATION -->
 
 <nav id="mainNav">
   <button class="logo" data-nav="home">prajwal ghormare</button>
+
   <div class="nav-links">
     <a data-nav="home" class="active">Home</a>
     <a data-nav="photos">Photos</a>
@@ -328,8 +1307,12 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
     <a data-nav="friends">Friends</a>
     <a data-nav="graduation">Graduation</a>
   </div>
-  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
 <div class="mobile-drawer" id="mobileDrawer">
   <a data-nav="home">Home</a>
   <a data-nav="photos">Photos</a>
@@ -339,13 +1322,20 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
   <a data-nav="graduation">Graduation</a>
 </div>
 
-<!-- ============ HOME ============ -->
+<!-- HOME PAGE -->
+
 <div class="view active-view" id="view-home">
+
   <section class="hero">
     <div class="hero-bg">
-      <img src="assets/photos/624505049_17905735656182773_2406870102889258837_n.jpg" alt="Prajwal Ghormare">
+      <img
+        src="assets/photos/624505049_17905735656182773_2406870102889258837_n.jpg"
+        alt="Prajwal Ghormare"
+      >
     </div>
+
     <div class="hero-scrim"></div>
+
     <div class="hero-content">
       <div class="eyebrow-row">
         <span class="badge">2024 ~ 2026</span>
@@ -353,21 +1343,50 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
         <span>·</span>
         <span>Waikato Edition</span>
       </div>
+
       <h1 class="title">prajwal<span class="r">ghormare</span></h1>
-      <div class="match"><span class="match-pct">100% Match</span><span class="match-label">A journey worth rewatching</span></div>
+
+      <div class="match">
+        <span class="match-pct">100% Match</span>
+        <span class="match-label">A journey worth rewatching</span>
+      </div>
+
       <div class="meta-row">
         <span><i class="bi bi-star-fill" style="color:#e5b711"></i> 335+ Days Later</span>
         <span><i class="bi bi-people-fill" style="color:var(--red)"></i> Friendship</span>
         <span><i class="bi bi-hd"></i> HD</span>
       </div>
-      <p class="synopsis">Every great story begins with a single decision. Leaving Nagpur, starting over in New Zealand, making lifelong friendships, surviving assignments, celebrating the little wins, and collecting memories along the way. This isn't just a university journey—it's the story of growing into the person you were meant to become.</p>
+
+      <p class="synopsis">
+        Every great story begins with a single decision. Leaving Nagpur,
+        starting over in New Zealand, making lifelong friendships,
+        surviving assignments, celebrating the little wins, and collecting
+        memories along the way. This isn't just a university journey—it's
+        the story of growing into the person you were meant to become.
+      </p>
+
       <div class="action-row">
-        <button class="btn-play" data-nav="photos"><i class="bi bi-play-fill"></i> Browse Photos</button>
-        <button class="btn-play" data-nav="videos"><i class="bi bi-play-fill"></i> Watch Videos</button>
-        <button class="btn-play" data-nav="bigvideo"><i class="bi bi-play-fill"></i> Play Feature</button>
-        <button class="btn-play" data-nav="friends"><i class="bi bi-play-fill"></i> Meet the Friends</button>
-        <button class="btn-play" data-nav="graduation"><i class="bi bi-mortarboard-fill"></i> Graduation</button>
+        <button class="btn-play" data-nav="photos">
+          <i class="bi bi-play-fill"></i> Browse Photos
+        </button>
+
+        <button class="btn-play" data-nav="videos">
+          <i class="bi bi-play-fill"></i> Watch Videos
+        </button>
+
+        <button class="btn-play" data-nav="bigvideo">
+          <i class="bi bi-play-fill"></i> Play Feature
+        </button>
+
+        <button class="btn-play" data-nav="friends">
+          <i class="bi bi-play-fill"></i> Meet the Friends
+        </button>
+
+        <button class="btn-play" data-nav="graduation">
+          <i class="bi bi-mortarboard-fill"></i> Graduation
+        </button>
       </div>
+
       <p class="cast-line"><b>Starring:</b> Prajwal Ghormare &amp; Friends</p>
       <p class="cast-line"><b>Genres:</b> Friendship, Coming-of-age, Feel-good</p>
     </div>
@@ -375,14 +1394,20 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
 
   <div class="info-col">
     <div class="highlights">
-      <div class="hl-header"><h2>Highlights</h2><span>Season 1 · 4 moments</span></div>
+      <div class="hl-header">
+        <h2>Highlights</h2>
+        <span>Season 1 · 4 moments</span>
+      </div>
+
       <div class="hl-rail" id="hlRail"></div>
     </div>
   </div>
 
   <section class="shelf">
     <h2>On the shelf</h2>
+
     <div class="shelf-grid">
+
       <div class="tile" data-nav="photos">
         <img src="assets/photos/Insta_Saver_@prajwal_ghormare_post_3415445366940558095_1440x1440_23.jpg" alt="Photos">
         <div class="tile-body">
@@ -391,6 +1416,7 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
           <div class="tile-sub">Every smile, captured</div>
         </div>
       </div>
+
       <div class="tile" data-nav="videos">
         <img src="assets/photos/616244717_17981000837951386_367922376016027173_n.jpeg" alt="Videos">
         <div class="tile-body">
@@ -399,6 +1425,7 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
           <div class="tile-sub">Moments that move</div>
         </div>
       </div>
+
       <div class="tile" data-nav="bigvideo">
         <img src="assets/photos/650840369_17987760200951386_8861875334253628911_n.jpeg" alt="Feature">
         <div class="tile-body">
@@ -407,6 +1434,7 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
           <div class="tile-sub">One story, full screen</div>
         </div>
       </div>
+
       <div class="tile" data-nav="friends">
         <img src="assets/photos/Insta_Saver_@prajwal_ghormare_post_3644558395504905430_1440x1440_7%20(1).jpg" alt="Friends">
         <div class="tile-body">
@@ -415,6 +1443,7 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
           <div class="tile-sub">The people in the story</div>
         </div>
       </div>
+
       <div class="tile" data-nav="graduation">
         <img src="assets/photos/IMG_0903.jpg" alt="Graduation">
         <div class="tile-body">
@@ -423,6 +1452,7 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
           <div class="tile-sub">The big day</div>
         </div>
       </div>
+
     </div>
   </section>
 
@@ -438,13 +1468,17 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
   </footer>
 </div>
 
-<!-- ============ PHOTOS ============ -->
+<!-- PHOTOS PAGE -->
+
 <div class="view" id="view-photos">
+
   <section class="hero">
     <div class="hero-bg">
       <img src="assets/photos/Insta_Saver_@prajwal_ghormare_post_3415445366940558095_1440x1440_23.jpg" alt="Photo Gallery">
     </div>
+
     <div class="hero-scrim"></div>
+
     <div class="hero-content">
       <div class="eyebrow-row">
         <span class="badge">Issue No. 01</span>
@@ -452,34 +1486,57 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
         <span>·</span>
         <span>Photo Gallery</span>
       </div>
+
       <h1 class="title">Photo <span class="r">Gallery</span></h1>
-      <div class="match"><span class="match-pct">100% Match</span><span class="match-label">Every moment, saved</span></div>
+
+      <div class="match">
+        <span class="match-pct">100% Match</span>
+        <span class="match-label">Every moment, saved</span>
+      </div>
+
       <div class="meta-row">
         <span><i class="bi bi-camera-fill" style="color:#e5b711"></i> 40+ Photos</span>
         <span><i class="bi bi-collection-fill" style="color:var(--red)"></i> Four Collections</span>
         <span><i class="bi bi-hd"></i> HD</span>
       </div>
-      <p class="synopsis">Every argument, every joke, every small moment — somehow becomes a memory worth keeping. Scroll through the collections below to relive them.</p>
+
+      <p class="synopsis">
+        Every argument, every joke, every small moment — somehow becomes
+        a memory worth keeping. Scroll through the collections below to
+        relive them.
+      </p>
+
       <div class="action-row">
-        <button class="btn-play" data-nav="videos"><i class="bi bi-play-fill"></i> Watch Videos</button>
-        <button class="btn-play" data-nav="friends"><i class="bi bi-play-fill"></i> Meet the Friends</button>
+        <button class="btn-play" data-nav="videos">
+          <i class="bi bi-play-fill"></i> Watch Videos
+        </button>
+
+        <button class="btn-play" data-nav="friends">
+          <i class="bi bi-play-fill"></i> Meet the Friends
+        </button>
       </div>
     </div>
   </section>
+
   <section class="rows-section" id="rows-photos"></section>
+
   <footer>
     <div class="footer-brand">Prajwal <span>Ghormare</span></div>
     <div class="footer-sub">✦ Issue 01 · Photos ✦</div>
   </footer>
 </div>
 
-<!-- ============ VIDEOS ============ -->
+<!-- VIDEOS PAGE -->
+
 <div class="view" id="view-videos">
+
   <section class="hero">
     <div class="hero-bg">
       <img src="assets/photos/616244717_17981000837951386_367922376016027173_n.jpeg" alt="Video Collection">
     </div>
+
     <div class="hero-scrim"></div>
+
     <div class="hero-content">
       <div class="eyebrow-row">
         <span class="badge">Issue No. 02</span>
@@ -487,17 +1544,32 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
         <span>·</span>
         <span>Video Collection</span>
       </div>
+
       <h1 class="title">Video <span class="r">Collection</span></h1>
-      <div class="match"><span class="match-pct">100% Match</span><span class="match-label">Too good to just be photos</span></div>
+
+      <div class="match">
+        <span class="match-pct">100% Match</span>
+        <span class="match-label">Too good to just be photos</span>
+      </div>
+
       <div class="meta-row">
         <span><i class="bi bi-camera-video-fill" style="color:#e5b711"></i> Motion Picture</span>
         <span><i class="bi bi-people-fill" style="color:var(--red)"></i> Friendship</span>
         <span><i class="bi bi-hd"></i> HD</span>
       </div>
-      <p class="synopsis">The moments that were too good to just be photos. Press play.</p>
+
+      <p class="synopsis">
+        The moments that were too good to just be photos. Press play.
+      </p>
+
       <div class="action-row">
-        <button class="btn-play" data-nav="photos"><i class="bi bi-play-fill"></i> Browse Photos</button>
-        <button class="btn-play" data-nav="bigvideo"><i class="bi bi-play-fill"></i> Play Feature</button>
+        <button class="btn-play" data-nav="photos">
+          <i class="bi bi-play-fill"></i> Browse Photos
+        </button>
+
+        <button class="btn-play" data-nav="bigvideo">
+          <i class="bi bi-play-fill"></i> Play Feature
+        </button>
       </div>
     </div>
   </section>
@@ -506,11 +1578,15 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
     <div class="video-hero-frame">
       <video id="mainVideoPlayer" controls playsinline></video>
     </div>
+
     <div class="video-hero-meta">
       <div>
         <div class="video-hero-title" id="mainVideoTitle">Featured</div>
-        <div class="video-hero-sub" id="mainVideoSub">Tap any thumbnail below to play it here</div>
+        <div class="video-hero-sub" id="mainVideoSub">
+          Tap any thumbnail below to play it here
+        </div>
       </div>
+
       <div class="video-hero-count" id="mainVideoCount"></div>
     </div>
   </section>
@@ -523,13 +1599,17 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
   </footer>
 </div>
 
-<!-- ============ FEATURE ============ -->
+<!-- FEATURE PAGE -->
+
 <div class="view" id="view-bigvideo">
+
   <section class="hero">
     <div class="hero-bg">
       <img src="assets/photos/650840369_17987760200951386_8861875334253628911_n.jpeg" alt="The Feature">
     </div>
+
     <div class="hero-scrim"></div>
+
     <div class="hero-content">
       <div class="eyebrow-row">
         <span class="badge">Issue No. 03</span>
@@ -537,17 +1617,33 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
         <span>·</span>
         <span>Full Screen</span>
       </div>
+
       <h1 class="title">The <span class="r">Feature</span></h1>
-      <div class="match"><span class="match-pct">100% Match</span><span class="match-label">No captions needed</span></div>
+
+      <div class="match">
+        <span class="match-pct">100% Match</span>
+        <span class="match-label">No captions needed</span>
+      </div>
+
       <div class="meta-row">
         <span><i class="bi bi-camera-video-fill" style="color:#e5b711"></i> With The Squad</span>
         <span><i class="bi bi-people-fill" style="color:var(--red)"></i> Friendship</span>
         <span><i class="bi bi-hd"></i> HD</span>
       </div>
-      <p class="synopsis">One video, full screen, no distractions. The moment that says it all — no captions needed, just watch.</p>
+
+      <p class="synopsis">
+        One video, full screen, no distractions. The moment that says it
+        all — no captions needed, just watch.
+      </p>
+
       <div class="action-row">
-        <button class="btn-play" data-nav="videos"><i class="bi bi-play-fill"></i> More Videos</button>
-        <button class="btn-play" data-nav="friends"><i class="bi bi-play-fill"></i> Meet the Friends</button>
+        <button class="btn-play" data-nav="videos">
+          <i class="bi bi-play-fill"></i> More Videos
+        </button>
+
+        <button class="btn-play" data-nav="friends">
+          <i class="bi bi-play-fill"></i> Meet the Friends
+        </button>
       </div>
     </div>
   </section>
@@ -558,9 +1654,13 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
         <source src="assets/videos/Prajwal%20Ghormare%20%F0%9F%8E%93!!.m4v" type="video/mp4">
       </video>
     </div>
+
     <div class="bigvideo-caption">
       <h2>With The Squad</h2>
-      <p>The moment that says it all — no captions needed, just watch. This is the one video that sums up the whole journey.</p>
+      <p>
+        The moment that says it all — no captions needed, just watch.
+        This is the one video that sums up the whole journey.
+      </p>
     </div>
   </section>
 
@@ -570,13 +1670,17 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
   </footer>
 </div>
 
-<!-- ============ FRIENDS ============ -->
+<!-- FRIENDS PAGE -->
+
 <div class="view" id="view-friends">
+
   <section class="hero">
     <div class="hero-bg">
       <img src="assets/photos/Insta_Saver_@prajwal_ghormare_post_3644558395504905430_1440x1440_7%20(1).jpg" alt="Meet the Friends">
     </div>
+
     <div class="hero-scrim"></div>
+
     <div class="hero-content">
       <div class="eyebrow-row">
         <span class="badge">Issue No. 04</span>
@@ -584,35 +1688,59 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
         <span>·</span>
         <span>Friends</span>
       </div>
+
       <h1 class="title">Meet the <span class="r">Friends</span></h1>
-      <div class="match"><span class="match-pct">100% Match</span><span class="match-label">The people who showed up</span></div>
+
+      <div class="match">
+        <span class="match-pct">100% Match</span>
+        <span class="match-label">The people who showed up</span>
+      </div>
+
       <div class="meta-row">
         <span><i class="bi bi-people-fill" style="color:#e5b711"></i> The Cast</span>
         <span><i class="bi bi-heart-fill" style="color:var(--red)"></i> Friendship</span>
         <span><i class="bi bi-hd"></i> HD</span>
       </div>
-      <p class="synopsis">The people who made every day worth showing up for.</p>
+
+      <p class="synopsis">
+        The people who made every day worth showing up for.
+      </p>
+
       <div class="action-row">
-        <button class="btn-play" data-nav="photos"><i class="bi bi-play-fill"></i> Browse Photos</button>
-        <button class="btn-play" data-nav="videos"><i class="bi bi-play-fill"></i> Watch Videos</button>
+        <button class="btn-play" data-nav="photos">
+          <i class="bi bi-play-fill"></i> Browse Photos
+        </button>
+
+        <button class="btn-play" data-nav="videos">
+          <i class="bi bi-play-fill"></i> Watch Videos
+        </button>
       </div>
     </div>
   </section>
+
   <div class="friends-grid" id="friendsGrid"></div>
+
   <footer>
     <div class="footer-brand">Prajwal <span>Ghormare</span></div>
     <div class="footer-sub">✦ Issue 04 · Friends ✦</div>
   </footer>
 </div>
 
-<!-- ============ GRADUATION ============ -->
+<!-- GRADUATION PAGE -->
+
 <div class="view" id="view-graduation">
+
   <section class="hero">
     <div class="hero-bg">
-      <img src="assets/photos/858263594_18018391919951386_7671922315410595362_n.jpeg" alt="Graduation"
-           onerror="this.onerror=null;this.src='assets/photos/IMG_0903.jpg'">
+      <img
+        src="assets/photos/858263594_18018391919951386_7671922315410595362_n.jpeg"
+        alt="Graduation"
+        onerror="this.onerror=null;this.src='assets/photos/IMG_0903.jpg'"
+      >
     </div>
+
     <div class="hero-scrim"></div>
+
     <div class="hero-content">
       <div class="eyebrow-row">
         <span class="badge">Issue No. 05</span>
@@ -620,17 +1748,34 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
         <span>·</span>
         <span>Graduation</span>
       </div>
+
       <h1 class="title">Graduation <span class="r">Day</span></h1>
-      <div class="match"><span class="match-pct">100% Match</span><span class="match-label">The chapter that made it all worth it</span></div>
+
+      <div class="match">
+        <span class="match-pct">100% Match</span>
+        <span class="match-label">The chapter that made it all worth it</span>
+      </div>
+
       <div class="meta-row">
         <span><i class="bi bi-mortarboard-fill" style="color:#e5b711"></i> Class of 2026</span>
         <span><i class="bi bi-heart-fill" style="color:var(--red)"></i> Proud Moment</span>
         <span><i class="bi bi-hd"></i> HD</span>
       </div>
-      <p class="synopsis">From a one-way flight out of Nagpur to walking across the stage in Waikato. Every late night, every assignment, every friendship led to this day.</p>
+
+      <p class="synopsis">
+        From a one-way flight out of Nagpur to walking across the stage
+        in Waikato. Every late night, every assignment, every friendship
+        led to this day.
+      </p>
+
       <div class="action-row">
-        <button class="btn-play" data-nav="photos"><i class="bi bi-play-fill"></i> Browse Photos</button>
-        <button class="btn-play" data-nav="videos"><i class="bi bi-play-fill"></i> Watch Videos</button>
+        <button class="btn-play" data-nav="photos">
+          <i class="bi bi-play-fill"></i> Browse Photos
+        </button>
+
+        <button class="btn-play" data-nav="videos">
+          <i class="bi bi-play-fill"></i> Watch Videos
+        </button>
       </div>
     </div>
   </section>
@@ -639,6 +1784,7 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
     <div class="bigvideo-frame">
       <video id="gradVideoPlayer" controls playsinline preload="metadata"></video>
     </div>
+
     <div class="bigvideo-caption">
       <h2>Graduation Day</h2>
       <p>The moment it all came together.</p>
@@ -646,8 +1792,10 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
   </section>
 
   <div class="row-head" style="max-width:1400px;margin:0 auto;padding:0 4vw;">
-    <h3>Graduation Photos</h3><span>8 photos</span>
+    <h3>Graduation Photos</h3>
+    <span>8 photos</span>
   </div>
+
   <div class="friends-grid" id="gradGrid"></div>
 
   <footer>
@@ -656,90 +1804,250 @@ footer{padding:2.2rem 4vw;border-top:1px solid var(--hair);display:flex;align-it
   </footer>
 </div>
 
+<!-- LIGHTBOX -->
+
 <div class="lightbox" id="lightbox">
-  <button class="lb-close" id="lbClose"><i class="bi bi-x-lg"></i></button>
-  <button class="lb-nav lb-prev" id="lbPrev"><i class="bi bi-chevron-left"></i></button>
+  <button class="lb-close" id="lbClose" aria-label="Close">
+    <i class="bi bi-x-lg"></i>
+  </button>
+
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous">
+    <i class="bi bi-chevron-left"></i>
+  </button>
+
   <img class="lightbox-img" id="lbImg" alt="">
-  <video class="lightbox-video" id="lbVideo" controls playsinline style="display:none;"></video>
-  <button class="lb-nav lb-next" id="lbNext"><i class="bi bi-chevron-right"></i></button>
+
+  <video
+    class="lightbox-video"
+    id="lbVideo"
+    controls
+    playsinline
+    style="display:none;"
+  ></video>
+
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Next">
+    <i class="bi bi-chevron-right"></i>
+  </button>
+
   <div class="lb-counter" id="lbCounter"></div>
 </div>
 
+<!-- BACKGROUND MUSIC -->
+
 <div class="player" id="player">
-  <button class="player-btn" id="playBtn"><i class="bi bi-play-fill" id="playIcon"></i></button>
+  <button class="player-btn" id="playBtn" aria-label="Play or pause music">
+    <i class="bi bi-play-fill" id="playIcon"></i>
+  </button>
+
   <span class="player-label">Theme</span>
-  <div class="player-bars"><span></span><span></span><span></span></div>
-  <audio id="bgAudio" loop><source src="assets/aj%20kal%20zindagi.mp3.m4a" type="audio/mp4"></audio>
+
+  <div class="player-bars">
+    <span></span><span></span><span></span>
+  </div>
+
+  <audio id="bgAudio" loop>
+    <source src="assets/aj%20kal%20zindagi.mp3.m4a" type="audio/mp4">
+  </audio>
 </div>
 
 <script>
-/* ── SCROLL-AWARE NAV ── */
-const mainNav=document.getElementById('mainNav');
-function onScroll(){ mainNav.classList.toggle('scrolled', window.scrollY>40); }
-window.addEventListener('scroll', onScroll, {passive:true});
+
+/* =========================================
+   NAVIGATION AND PAGE SWITCHING
+========================================= */
+
+const mainNav = document.getElementById('mainNav');
+const hamburger = document.getElementById('hamburger');
+const mobileDrawer = document.getElementById('mobileDrawer');
+
+function onScroll(){
+  mainNav.classList.toggle('scrolled',window.scrollY>40);
+}
+
+window.addEventListener('scroll',onScroll,{passive:true});
 onScroll();
 
-const hamburger=document.getElementById('hamburger');
-const mobileDrawer=document.getElementById('mobileDrawer');
+const viewNames=[
+  'home',
+  'photos',
+  'videos',
+  'bigvideo',
+  'friends',
+  'graduation'
+];
 
-const cardObserver=new IntersectionObserver(entries=>{
-  entries.forEach((e,i)=>{
-    if(e.isIntersecting){
-      setTimeout(()=>e.target.classList.add('visible'), i*35);
-      cardObserver.unobserve(e.target);
+const views={};
+
+viewNames.forEach(name=>{
+  views[name]=document.getElementById('view-'+name);
+});
+
+const inited={home:true};
+
+/* =========================================
+   CARD ANIMATIONS
+========================================= */
+
+const cardObserver = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      cardObserver.unobserve(entry.target);
     }
   });
 },{threshold:.08});
 
-/* ── VIEW SWITCHING ── */
-const viewNames=['home','photos','videos','bigvideo','friends','graduation'];
-const views={}; viewNames.forEach(n=>views[n]=document.getElementById('view-'+n));
-const inited={};
+function observeCards(container){
+  if(!container)return;
+
+  container.querySelectorAll(
+    '.rcard:not(.visible),.friend-card:not(.visible)'
+  ).forEach(card=>cardObserver.observe(card));
+}
+
+/* =========================================
+   NAVIGATION FUNCTION
+========================================= */
 
 function goTo(name){
-  if(!views[name]) return;
-  viewNames.forEach(n=>views[n].classList.toggle('active-view',n===name));
-  document.querySelectorAll('.nav-links a, .mobile-drawer a').forEach(a=>a.classList.toggle('active',a.dataset.nav===name));
-  window.scrollTo({top:0,behavior:'auto'});
-  mobileDrawer.classList.remove('open'); hamburger.classList.remove('open');
-  if(!inited[name]){ inited[name]=true; initView(name); }
-  requestAnimationFrame(()=>{
-    document.querySelectorAll(`#view-${name} .rcard:not(.visible), #view-${name} .friend-card:not(.visible)`).forEach(el=>cardObserver.observe(el));
+  if(!views[name])return;
+
+  viewNames.forEach(viewName=>{
+    views[viewName].classList.toggle(
+      'active-view',
+      viewName===name
+    );
   });
-  if(name!=='videos'){ const mp=document.getElementById('mainVideoPlayer'); if(mp) mp.pause(); }
-  if(name!=='bigvideo'){ const bv=document.getElementById('bigVideoPlayer'); if(bv) bv.pause(); }
-  if(name!=='graduation'){ const gv=document.getElementById('gradVideoPlayer'); if(gv) gv.pause(); }
+
+  document.querySelectorAll(
+    '.nav-links a,.mobile-drawer a'
+  ).forEach(link=>{
+    link.classList.toggle(
+      'active',
+      link.dataset.nav===name
+    );
+  });
+
+  window.scrollTo({top:0,behavior:'auto'});
+
+  mobileDrawer.classList.remove('open');
+  hamburger.classList.remove('open');
+
+  if(!inited[name]){
+    inited[name]=true;
+    initView(name);
+  }
+
+  requestAnimationFrame(()=>{
+    observeCards(views[name]);
+  });
+
+  if(name!=='videos'){
+    document.getElementById('mainVideoPlayer')?.pause();
+  }
+
+  if(name!=='bigvideo'){
+    document.getElementById('bigVideoPlayer')?.pause();
+  }
+
+  if(name!=='graduation'){
+    document.getElementById('gradVideoPlayer')?.pause();
+  }
 }
-document.querySelectorAll('[data-nav]').forEach(el=>{
-  el.addEventListener('click', e=>{ e.preventDefault(); goTo(el.dataset.nav); });
-});
-hamburger.addEventListener('click', ()=>{
-  const open=hamburger.classList.toggle('open');
-  mobileDrawer.classList.toggle('open', open);
+
+document.querySelectorAll('[data-nav]').forEach(element=>{
+  element.addEventListener('click',event=>{
+    event.preventDefault();
+    goTo(element.dataset.nav);
+  });
 });
 
-/* ── HIGHLIGHTS ── */
-const HIGHLIGHTS = [
-  {src:"assets/photos/451949073_2553221618198721_2744585950748598_n.jpeg", title:"Leaving Home — The Beginning", desc:"Every journey starts with one brave decision. Leaving Nagpur behind, Prajwal began a new chapter in New Zealand, carrying dreams bigger than his suitcase."},
-  {src:"assets/photos/625025153_18051178838703650_6488121494698172612_n.jpg", title:"First Days at Waikato", desc:"New campus, unfamiliar faces, and countless firsts. Every lecture, every walk across campus, and every challenge slowly became part of a new routine."},
-  {src:"assets/photos/Insta_Saver_@prajwal_ghormare_post_3644558395504905430_1440x1440_7.jpg", title:"Finding His People", desc:"Some friendships happen when you least expect them. What started as simple conversations turned into a support system that made New Zealand feel a little more like home."},
-  {src:"assets/photos/650840369_17987760200951386_8861875334253628911_n.jpeg", title:"The Journey Continues", desc:"From a student arriving in New Zealand with big dreams to someone filled with unforgettable memories and lifelong friendships, this story is still being written."}
+hamburger.addEventListener('click',()=>{
+  const open=hamburger.classList.toggle('open');
+  mobileDrawer.classList.toggle('open',open);
+});
+
+/* =========================================
+   HIGHLIGHTS
+========================================= */
+
+const HIGHLIGHTS=[
+  {
+    src:"assets/photos/451949073_2553221618198721_2744585950748598_n.jpeg",
+    title:"Leaving Home — The Beginning",
+    desc:"Every journey starts with one brave decision. Leaving Nagpur behind, Prajwal began a new chapter in New Zealand, carrying dreams bigger than his suitcase."
+  },
+  {
+    src:"assets/photos/625025153_18051178838703650_6488121494698172612_n.jpg",
+    title:"First Days at Waikato",
+    desc:"New campus, unfamiliar faces, and countless firsts. Every lecture, every walk across campus, and every challenge slowly became part of a new routine."
+  },
+  {
+    src:"assets/photos/Insta_Saver_@prajwal_ghormare_post_3644558395504905430_1440x1440_7.jpg",
+    title:"Finding His People",
+    desc:"Some friendships happen when you least expect them. What started as simple conversations turned into a support system that made New Zealand feel a little more like home."
+  },
+  {
+    src:"assets/photos/650840369_17987760200951386_8861875334253628911_n.jpeg",
+    title:"The Journey Continues",
+    desc:"From a student arriving in New Zealand with big dreams to someone filled with unforgettable memories and lifelong friendships, this story is still being written."
+  }
 ];
 
 function buildHighlights(){
   const rail=document.getElementById('hlRail');
-  if(!rail) return;
+  if(!rail)return;
+
   rail.innerHTML='';
-  HIGHLIGHTS.forEach((h,idx)=>{
-    const card=document.createElement('div'); card.className='hl-card';
-    card.innerHTML=`<div class="hl-thumb"><span class="hl-num">${idx+1}</span><img src="${h.src}" alt="${h.title}" loading="lazy" onerror="this.closest('.hl-card').style.display='none'"></div><div class="hl-body"><h3>${h.title}</h3><p>${h.desc}</p></div>`;
-    card.addEventListener('click', ()=>openPhotoLb(HIGHLIGHTS, idx));
+
+  HIGHLIGHTS.forEach((highlight,index)=>{
+    const card=document.createElement('div');
+    card.className='hl-card';
+
+    const thumb=document.createElement('div');
+    thumb.className='hl-thumb';
+
+    const number=document.createElement('span');
+    number.className='hl-num';
+    number.textContent=index+1;
+
+    const image=document.createElement('img');
+    image.src=highlight.src;
+    image.alt=highlight.title;
+    image.loading='lazy';
+
+    image.onerror=()=>{
+      image.style.display='none';
+      thumb.classList.add('image-missing');
+    };
+
+    thumb.append(number,image);
+
+    const body=document.createElement('div');
+    body.className='hl-body';
+
+    const title=document.createElement('h3');
+    title.textContent=highlight.title;
+
+    const description=document.createElement('p');
+    description.textContent=highlight.desc;
+
+    body.append(title,description);
+    card.append(thumb,body);
+
+    card.addEventListener('click',()=>{
+      openPhotoLb(HIGHLIGHTS,index);
+    });
+
     rail.appendChild(card);
   });
 }
 
-/* ── GRADUATION DATA ── */
-const GRADUATION_PHOTOS = [
+/* =========================================
+   GRADUATION DATA
+========================================= */
+
+const GRADUATION_PHOTOS=[
   {src:"assets/photos/WhatsApp Image 2026-10-20 at 18.54.27.jpeg"},
   {src:"assets/photos/IMG_0903.jpg"},
   {src:"assets/photos/858263594_18018391919951386_7671922315410595362_n.jpeg"},
@@ -749,148 +2057,338 @@ const GRADUATION_PHOTOS = [
   {src:"assets/photos/857774274_18018391922951386_1377867807245419369_n.jpeg"},
   {src:"assets/photos/855485655_18018391979951386_2716281367468256143_n.jpeg"}
 ];
-const GRADUATION_VIDEO = {src:"assets/videos/WhatsApp Video 2026-10-20 at 18.59.10.mp4", title:"Graduation Day", desc:"The moment it all came together."};
 
-/* ── PHOTO GROUPS ── */
-const PHOTO_GROUPS = [
-  { label:"Early Days", items:[
-    {src:"assets/photos/Insta_Saver_@prajwal_ghormare_post_3415445366940558095_1440x1440_23.jpg"},
-    {src:"assets/photos/unidays1.jpg"},
-    {src:"assets/photos/unidays2.jpg"},
-    {src:"assets/photos/unidays3.jpg"},
-    {src:"assets/photos/Screenshot 2026-07-26 at 4.46.08 PM.jpg"},
-    {src:"assets/photos/Insta_Saver_@prajwal_ghormare_post_3431297675247436033_1440x1440_20 (2).jpg"},
-    {src:"assets/photos/Insta_Saver_@prajwal_ghormare_post_3431297675247436033_1440x1440_20 (3).jpg"},
-    {src:"assets/photos/Insta_Saver_@prajwal_ghormare_post_3431297675247436033_1440x1440_20 (1).jpg"},
-    {src:"assets/photos/Insta_Saver_@prajwal_ghormare_post_3462706320614830548_1440x1440_18 (1).jpg"},
-    {src:"assets/photos/Insta_Saver_@prajwal_ghormare_post_3462706320614830548_1440x1440_18 (2).jpg"},
-    {src:"assets/photos/Insta_Saver_@prajwal_ghormare_post_3477793999014545592_1440x1440_16 (1).jpg"},
-    {src:"assets/photos/Insta_Saver_@prajwal_ghormare_post_3464739944008636918_1440x1800_17.jpg"}
-  ]},
-  { label:"PRAJWAL THE COOK", items:[
-    {src:"assets/photos/Insta_Saver_@prajwal_ghormare_post_3490980784045514555_1080x612_15_037 copy.jpg"},
-    {src:"assets/photos/Insta_Saver_@prajwal_ghormare_post_3490980784045514555_1080x612_15_047 copy.jpg"},
-    {src:"assets/photos/gulab jamun 2 .jpg"},
-    {src:"assets/photos/cooking 1.jpg"},
-    {src:"assets/photos/Untitled 2_119.jpg"}
-  ]},
-  { label:"Recent Memories", items:[
-    {src:"assets/photos/624505049_17905735656182773_2406870102889258837_n.jpg"},
-    {src:"assets/photos/trad1.jpg"},
-    {src:"assets/photos/trad2.jpg"},
-    {src:"assets/photos/trad3.jpg"},
-    {src:"assets/photos/trad4.jpg"},
-    {src:"assets/photos/616244717_17981000837951386_367922376016027173_n.jpeg"},
-    {src:"assets/photos/650840369_17987760200951386_8861875334253628911_n.jpeg"}
-  ]},
-  { label:"Graduation", items:[
-    {src:"assets/photos/WhatsApp Image 2026-10-20 at 18.54.27.jpeg"},
-    {src:"assets/photos/IMG_0903.jpg"},
-    {src:"assets/photos/858263594_18018391919951386_7671922315410595362_n.jpeg"},
-    {src:"assets/photos/859382586_18018391934951386_6961412778196819954_n.jpeg"},
-    {src:"assets/photos/858864016_18018391889951386_8283782974071566869_n (1).jpeg"},
-    {src:"assets/photos/858840435_18018391901951386_2771562600638574738_n.jpeg"},
-    {src:"assets/photos/857774274_18018391922951386_1377867807245419369_n.jpeg"},
-    {src:"assets/photos/855485655_18018391979951386_2716281367468256143_n.jpeg"}
-  ]}
+const GRADUATION_VIDEO={
+  src:"assets/videos/WhatsApp Video 2026-10-20 at 18.59.10.mp4",
+  title:"Graduation Day",
+  desc:"The moment it all came together."
+};
+
+/* =========================================
+   PHOTO COLLECTIONS
+========================================= */
+
+const PHOTO_GROUPS=[
+  {
+    label:"Early Days",
+    items:[
+      {src:"assets/photos/Insta_Saver_@prajwal_ghormare_post_3415445366940558095_1440x1440_23.jpg"},
+      {src:"assets/photos/unidays1.jpg"},
+      {src:"assets/photos/unidays2.jpg"},
+      {src:"assets/photos/unidays3.jpg"},
+      {src:"assets/photos/Screenshot 2026-07-26 at 4.46.08 PM.jpg"},
+      {src:"assets/photos/Insta_Saver_@prajwal_ghormare_post_3431297675247436033_1440x1440_20 (2).jpg"},
+      {src:"assets/photos/Insta_Saver_@prajwal_ghormare_post_3431297675247436033_1440x1440_20 (3).jpg"},
+      {src:"assets/photos/Insta_Saver_@prajwal_ghormare_post_3431297675247436033_1440x1440_20 (1).jpg"},
+      {src:"assets/photos/Insta_Saver_@prajwal_ghormare_post_3462706320614830548_1440x1440_18 (1).jpg"},
+      {src:"assets/photos/Insta_Saver_@prajwal_ghormare_post_3462706320614830548_1440x1440_18 (2).jpg"},
+      {src:"assets/photos/Insta_Saver_@prajwal_ghormare_post_3477793999014545592_1440x1440_16 (1).jpg"},
+      {src:"assets/photos/Insta_Saver_@prajwal_ghormare_post_3464739944008636918_1440x1800_17.jpg"}
+    ]
+  },
+  {
+    label:"PRAJWAL THE COOK",
+    items:[
+      {src:"assets/photos/Insta_Saver_@prajwal_ghormare_post_3490980784045514555_1080x612_15_037 copy.jpg"},
+      {src:"assets/photos/Insta_Saver_@prajwal_ghormare_post_3490980784045514555_1080x612_15_047 copy.jpg"},
+      {src:"assets/photos/gulab jamun 2 .jpg"},
+      {src:"assets/photos/cooking 1.jpg"},
+      {src:"assets/photos/Untitled 2_119.jpg"}
+    ]
+  },
+  {
+    label:"Recent Memories",
+    items:[
+      {src:"assets/photos/624505049_17905735656182773_2406870102889258837_n.jpg"},
+      {src:"assets/photos/trad1.jpg"},
+      {src:"assets/photos/trad2.jpg"},
+      {src:"assets/photos/trad3.jpg"},
+      {src:"assets/photos/trad4.jpg"},
+      {src:"assets/photos/616244717_17981000837951386_367922376016027173_n.jpeg"},
+      {src:"assets/photos/650840369_17987760200951386_8861875334253628911_n.jpeg"}
+    ]
+  },
+  {
+    label:"Graduation",
+    items:GRADUATION_PHOTOS
+  }
 ];
 
+/* =========================================
+   PHOTO RAIL ARROWS
+========================================= */
+
 function attachRailArrows(wrap){
+  if(!wrap)return;
+
   const rail=wrap.querySelector('.rail');
-  const leftBtn=wrap.querySelector('.rail-arrow.left');
-  const rightBtn=wrap.querySelector('.rail-arrow.right');
-  const scrollAmt=()=>rail.clientWidth*0.85;
-  leftBtn.addEventListener('click', ()=>rail.scrollBy({left:-scrollAmt(),behavior:'smooth'}));
-  rightBtn.addEventListener('click', ()=>rail.scrollBy({left:scrollAmt(),behavior:'smooth'}));
+  const leftButton=wrap.querySelector('.rail-arrow.left');
+  const rightButton=wrap.querySelector('.rail-arrow.right');
+
+  if(!rail||!leftButton||!rightButton)return;
+
+  const scrollAmount=()=>rail.clientWidth*.85;
+
+  leftButton.addEventListener('click',()=>{
+    rail.scrollBy({
+      left:-scrollAmount(),
+      behavior:'smooth'
+    });
+  });
+
+  rightButton.addEventListener('click',()=>{
+    rail.scrollBy({
+      left:scrollAmount(),
+      behavior:'smooth'
+    });
+  });
 }
+
+/* =========================================
+   BUILD PHOTO GALLERY
+========================================= */
 
 function buildPhotoRows(){
   const container=document.getElementById('rows-photos');
+  if(!container)return;
+
   container.innerHTML='';
-  const allItems=[]; let globalIdx=0;
+
+  const allItems=PHOTO_GROUPS.flatMap(group=>group.items);
+  let globalIndex=0;
+
   PHOTO_GROUPS.forEach(group=>{
-    const block=document.createElement('div'); block.className='row-block';
-    block.innerHTML=`<div class="row-head"><h3>${group.label}</h3><span>${group.items.length} photos</span></div>
+    const block=document.createElement('div');
+    block.className='row-block';
+
+    block.innerHTML=`
+      <div class="row-head">
+        <h3>${group.label}</h3>
+        <span>${group.items.length} photos</span>
+      </div>
       <div class="rail-wrap">
-        <button class="rail-arrow left"><i class="bi bi-chevron-left"></i></button>
+        <button class="rail-arrow left" aria-label="Scroll left">
+          <i class="bi bi-chevron-left"></i>
+        </button>
         <div class="rail"></div>
-        <button class="rail-arrow right"><i class="bi bi-chevron-right"></i></button>
-      </div>`;
+        <button class="rail-arrow right" aria-label="Scroll right">
+          <i class="bi bi-chevron-right"></i>
+        </button>
+      </div>
+    `;
+
     const rail=block.querySelector('.rail');
+
     group.items.forEach(item=>{
-      const idx=globalIdx++; allItems.push(item);
-      const card=document.createElement('div'); card.className='rcard';
-      card.innerHTML=`<img src="${item.src}" alt="Photo" loading="lazy" onerror="this.closest('.rcard').style.display='none'"><span class="num-badge">${idx+1}</span><div class="play-ov"><i class="bi bi-arrows-angle-expand"></i></div><div class="card-info"><span class="ci-label"><i class="bi bi-camera-fill"></i>${group.label}</span></div>`;
-      card.addEventListener('click',()=>openPhotoLb(allItems, idx));
+      const index=globalIndex++;
+
+      const card=document.createElement('div');
+      card.className='rcard';
+
+      const image=document.createElement('img');
+      image.src=item.src;
+      image.alt=group.label+' photo';
+      image.loading='lazy';
+
+      image.onerror=()=>{
+        card.style.display='none';
+      };
+
+      const number=document.createElement('span');
+      number.className='num-badge';
+      number.textContent=index+1;
+
+      const overlay=document.createElement('div');
+      overlay.className='play-ov';
+      overlay.innerHTML='<i class="bi bi-arrows-angle-expand"></i>';
+
+      const info=document.createElement('div');
+      info.className='card-info';
+      info.innerHTML=`
+        <span class="ci-label">
+          <i class="bi bi-camera-fill"></i>
+          ${group.label}
+        </span>
+      `;
+
+      card.append(image,number,overlay,info);
+
+      card.addEventListener('click',()=>{
+        openPhotoLb(allItems,index);
+      });
+
       rail.appendChild(card);
     });
+
     container.appendChild(block);
     attachRailArrows(block.querySelector('.rail-wrap'));
   });
-  return allItems;
+
+  observeCards(container);
 }
 
-/* ── VIDEOS DATA ── */
-const VIDEO_GROUPS = [
-  { label:"All Videos", items:[
-    {src:"assets/videos/gulab jamun.mp4", title:"Gulab Jamun Night", desc:"A little kitchen chaos, a lot of laughs."},
-    {src:"assets/videos/friends.mp4", title:"With The Squad", desc:"Just another day being ridiculous together."},
-    {src:"assets/videos/WhatsApp Video 2026-10-20 at 18.59.10.mp4", title:"Graduation Day", desc:"The moment it all came together."}
-  ]}
+/* =========================================
+   VIDEO COLLECTIONS
+========================================= */
+
+const VIDEO_GROUPS=[
+  {
+    label:"All Videos",
+    items:[
+      {
+        src:"assets/videos/gulab jamun.mp4",
+        title:"Gulab Jamun Night",
+        desc:"A little kitchen chaos, a lot of laughs."
+      },
+      {
+        src:"assets/videos/friends.mp4",
+        title:"With The Squad",
+        desc:"Just another day being ridiculous together."
+      },
+      {
+        src:"assets/videos/WhatsApp Video 2026-10-20 at 18.59.10.mp4",
+        title:"Graduation Day",
+        desc:"The moment it all came together."
+      }
+    ]
+  }
 ];
 
 let videoItemsFlat=[];
 
-function setMainVideo(item, idx, total, scroll=true){
-  const mp=document.getElementById('mainVideoPlayer');
-  const titleEl=document.getElementById('mainVideoTitle');
-  const subEl=document.getElementById('mainVideoSub');
-  const countEl=document.getElementById('mainVideoCount');
-  if(!mp) return;
-  mp.pause();
-  mp.src=item.src;
-  if(item.poster) mp.poster=item.poster; else mp.removeAttribute('poster');
-  mp.load();
-  if(scroll) mp.play().catch(()=>{});
-  if(titleEl) titleEl.textContent=item.title||'Featured';
-  if(subEl) subEl.textContent=item.desc||'';
-  if(countEl) countEl.textContent=`Video ${idx+1} of ${total}`;
-  if(scroll) document.querySelector('.video-hero')?.scrollIntoView({behavior:'smooth',block:'start'});
+/* =========================================
+   MAIN VIDEO PLAYER
+========================================= */
+
+function setMainVideo(item,index,total,shouldPlay=true){
+  const player=document.getElementById('mainVideoPlayer');
+  const title=document.getElementById('mainVideoTitle');
+  const subtitle=document.getElementById('mainVideoSub');
+  const count=document.getElementById('mainVideoCount');
+
+  if(!player||!item)return;
+
+  player.pause();
+  player.src=item.src;
+
+  if(item.poster){
+    player.poster=item.poster;
+  }else{
+    player.removeAttribute('poster');
+  }
+
+  player.load();
+
+  if(title)title.textContent=item.title||'Featured';
+  if(subtitle)subtitle.textContent=item.desc||'';
+  if(count)count.textContent=`Video ${index+1} of ${total}`;
+
+  if(shouldPlay){
+    player.play().catch(()=>{});
+
+    document.querySelector('.video-hero')?.scrollIntoView({
+      behavior:'smooth',
+      block:'start'
+    });
+  }
 }
+
+/* =========================================
+   BUILD VIDEO GALLERY
+========================================= */
 
 function buildVideoRows(){
   const container=document.getElementById('rows-videos');
-  if(!container) return;
+  if(!container)return;
+
   container.innerHTML='';
-  const allItems=[]; let globalIdx=0;
-  VIDEO_GROUPS.forEach(group=>group.items.forEach(it=>allItems.push(it)));
-  videoItemsFlat=allItems;
+
+  videoItemsFlat=VIDEO_GROUPS.flatMap(group=>group.items);
+
+  let globalIndex=0;
 
   VIDEO_GROUPS.forEach(group=>{
-    const block=document.createElement('div'); block.className='row-block';
-    block.innerHTML=`<div class="row-head"><h3>${group.label}</h3><span>${group.items.length} video${group.items.length===1?'':'s'}</span></div>
+    const block=document.createElement('div');
+    block.className='row-block';
+
+    block.innerHTML=`
+      <div class="row-head">
+        <h3>${group.label}</h3>
+        <span>${group.items.length} videos</span>
+      </div>
       <div class="rail-wrap">
-        <button class="rail-arrow left"><i class="bi bi-chevron-left"></i></button>
+        <button class="rail-arrow left" aria-label="Scroll left">
+          <i class="bi bi-chevron-left"></i>
+        </button>
         <div class="rail"></div>
-        <button class="rail-arrow right"><i class="bi bi-chevron-right"></i></button>
-      </div>`;
+        <button class="rail-arrow right" aria-label="Scroll right">
+          <i class="bi bi-chevron-right"></i>
+        </button>
+      </div>
+    `;
+
     const rail=block.querySelector('.rail');
+
     group.items.forEach(item=>{
-      const idx=globalIdx++;
-      const card=document.createElement('div'); card.className='rcard video-card';
-      card.innerHTML=`<video src="${item.src}" ${item.poster?`poster="${item.poster}"`:''} muted playsinline preload="metadata" onerror="this.closest('.rcard').style.display='none'"></video><span class="num-badge">${idx+1}</span><div class="play-ov"><i class="bi bi-play-circle-fill"></i></div><div class="card-info"><span class="ci-label"><i class="bi bi-camera-video-fill"></i>${item.title||group.label}</span></div>`;
-      card.addEventListener('click', ()=>setMainVideo(item, idx, allItems.length, true));
+      const index=globalIndex++;
+
+      const card=document.createElement('div');
+      card.className='rcard video-card';
+
+      const video=document.createElement('video');
+      video.src=item.src;
+      video.muted=true;
+      video.playsInline=true;
+      video.preload='metadata';
+
+      if(item.poster)video.poster=item.poster;
+
+      video.onerror=()=>{
+        card.style.display='none';
+      };
+
+      const number=document.createElement('span');
+      number.className='num-badge';
+      number.textContent=index+1;
+
+      const overlay=document.createElement('div');
+      overlay.className='play-ov';
+      overlay.innerHTML='<i class="bi bi-play-circle-fill"></i>';
+
+      const info=document.createElement('div');
+      info.className='card-info';
+      info.innerHTML=`
+        <span class="ci-label">
+          <i class="bi bi-camera-video-fill"></i>
+          ${item.title||group.label}
+        </span>
+      `;
+
+      card.append(video,number,overlay,info);
+
+      card.addEventListener('click',()=>{
+        setMainVideo(item,index,videoItemsFlat.length,true);
+      });
+
       rail.appendChild(card);
     });
+
     container.appendChild(block);
     attachRailArrows(block.querySelector('.rail-wrap'));
   });
 
-  if(allItems.length){ setMainVideo(allItems[0], 0, allItems.length, false); }
+  if(videoItemsFlat.length){
+    setMainVideo(videoItemsFlat[0],0,videoItemsFlat.length,false);
+  }
+
+  observeCards(container);
 }
 
-/* ── FRIENDS ── */
-const FRIENDS = [
+/* =========================================
+   FRIENDS GALLERY
+========================================= */
+
+const FRIENDS=[
   {src:"assets/photos/357847908_1477427589726916_3053514014304961759_n.jpg"},
   {src:"assets/photos/623697130_18012642638660055_7424313283328927550_n.jpg"},
   {src:"assets/photos/358786817_593873529302255_271037225496497232_n.webp"},
@@ -912,161 +2410,452 @@ const FRIENDS = [
   {src:"assets/photos/balloons with friends 3 .jpg"},
   {src:"assets/photos/horror r 2 .jpg"},
   {src:"assets/photos/horror r 3 .jpg"},
-    {src:"assets/photos/858263594_18018391919951386_7671922315410595362_n.jpeg"},
-    {src:"assets/photos/859382586_18018391934951386_6961412778196819954_n.jpeg"},
-    {src:"assets/photos/858864016_18018391889951386_8283782974071566869_n (1).jpeg"},
-    {src:"assets/photos/858840435_18018391901951386_2771562600638574738_n.jpeg"},
-    {src:"assets/photos/857774274_18018391922951386_1377867807245419369_n.jpeg"},
-    {src:"assets/photos/855485655_18018391979951386_2716281367468256143_n.jpeg"}
+  {src:"assets/photos/858263594_18018391919951386_7671922315410595362_n.jpeg"},
+  {src:"assets/photos/859382586_18018391934951386_6961412778196819954_n.jpeg"},
+  {src:"assets/photos/858864016_18018391889951386_8283782974071566869_n (1).jpeg"},
+  {src:"assets/photos/858840435_18018391901951386_2771562600638574738_n.jpeg"},
+  {src:"assets/photos/857774274_18018391922951386_1377867807245419369_n.jpeg"},
+  {src:"assets/photos/855485655_18018391979951386_2716281367468256143_n.jpeg"}
 ];
 
 function buildFriends(){
   const grid=document.getElementById('friendsGrid');
-  if(!grid) return;
+  if(!grid)return;
+
   grid.innerHTML='';
-  FRIENDS.forEach((f,idx)=>{
-    const card=document.createElement('div'); card.className='friend-card';
-    const isVideo=f.type==='video';
-    const thumbMedia = isVideo
-      ? `<video src="${f.src}" ${f.poster?`poster="${f.poster}"`:''} muted playsinline preload="metadata" onerror="this.closest('.friend-card').style.display='none'"></video><span class="vid-badge"><i class="bi bi-camera-video-fill"></i>Video</span>`
-      : `<img src="${f.src}" alt="Photo" loading="lazy" onerror="this.closest('.friend-card').style.display='none'">`;
-    card.innerHTML=`<div class="friend-photo">${thumbMedia}<div class="play-ov"><i class="bi ${isVideo?'bi-play-circle-fill':'bi-arrows-angle-expand'}"></i></div></div>`;
-    card.addEventListener('click', ()=>openPhotoLb(FRIENDS, idx));
+
+  FRIENDS.forEach((friend,index)=>{
+    const card=document.createElement('div');
+    card.className='friend-card';
+
+    const photo=document.createElement('div');
+    photo.className='friend-photo';
+
+    if(friend.type==='video'){
+      const video=document.createElement('video');
+      video.src=friend.src;
+      video.muted=true;
+      video.playsInline=true;
+      video.preload='metadata';
+
+      if(friend.poster)video.poster=friend.poster;
+
+      video.onerror=()=>{
+        card.style.display='none';
+      };
+
+      const badge=document.createElement('span');
+      badge.className='vid-badge';
+      badge.innerHTML='<i class="bi bi-camera-video-fill"></i> Video';
+
+      photo.append(video,badge);
+    }else{
+      const image=document.createElement('img');
+      image.src=friend.src;
+      image.alt='Friendship memory '+(index+1);
+      image.loading='lazy';
+
+      image.onerror=()=>{
+        card.style.display='none';
+      };
+
+      photo.appendChild(image);
+    }
+
+    const overlay=document.createElement('div');
+    overlay.className='play-ov';
+
+    overlay.innerHTML=`
+      <i class="bi ${
+        friend.type==='video'
+        ?'bi-play-circle-fill'
+        :'bi-arrows-angle-expand'
+      }"></i>
+    `;
+
+    photo.appendChild(overlay);
+    card.appendChild(photo);
+
+    card.addEventListener('click',()=>{
+      openPhotoLb(FRIENDS,index);
+    });
+
     grid.appendChild(card);
   });
+
+  observeCards(grid);
 }
 
-/* ── GRADUATION ── */
+/* =========================================
+   GRADUATION GALLERY
+========================================= */
+
 function buildGraduation(){
-  const gv=document.getElementById('gradVideoPlayer');
-  if(gv){ gv.src=GRADUATION_VIDEO.src; }
+  const video=document.getElementById('gradVideoPlayer');
+
+  if(video){
+    video.src=GRADUATION_VIDEO.src;
+    video.load();
+  }
+
   const grid=document.getElementById('gradGrid');
-  if(!grid) return;
+  if(!grid)return;
+
   grid.innerHTML='';
-  GRADUATION_PHOTOS.forEach((f,idx)=>{
-    const card=document.createElement('div'); card.className='friend-card';
-    card.innerHTML=`<div class="friend-photo"><img src="${f.src}" alt="Graduation photo ${idx+1}" loading="lazy" onerror="this.closest('.friend-card').style.display='none'"><div class="play-ov"><i class="bi bi-arrows-angle-expand"></i></div></div>`;
-    card.addEventListener('click', ()=>openPhotoLb(GRADUATION_PHOTOS, idx));
+
+  GRADUATION_PHOTOS.forEach((photo,index)=>{
+    const card=document.createElement('div');
+    card.className='friend-card';
+
+    const photoBox=document.createElement('div');
+    photoBox.className='friend-photo';
+
+    const image=document.createElement('img');
+    image.src=photo.src;
+    image.alt='Graduation photo '+(index+1);
+    image.loading='lazy';
+
+    image.onerror=()=>{
+      card.style.display='none';
+    };
+
+    const overlay=document.createElement('div');
+    overlay.className='play-ov';
+    overlay.innerHTML='<i class="bi bi-arrows-angle-expand"></i>';
+
+    photoBox.append(image,overlay);
+    card.appendChild(photoBox);
+
+    card.addEventListener('click',()=>{
+      openPhotoLb(GRADUATION_PHOTOS,index);
+    });
+
     grid.appendChild(card);
   });
+
+  observeCards(grid);
 }
+
+/* =========================================
+   INITIALISE PAGES
+========================================= */
 
 function initView(name){
-  if(name==='photos'){
-    buildPhotoRows();
-    document.querySelectorAll('#view-photos .rcard').forEach(el=>cardObserver.observe(el));
-  }
-  if(name==='videos'){
-    buildVideoRows();
-    document.querySelectorAll('#view-videos .rcard').forEach(el=>cardObserver.observe(el));
-  }
-  if(name==='friends'){
-    buildFriends();
-    document.querySelectorAll('#view-friends .friend-card').forEach(el=>cardObserver.observe(el));
-  }
-  if(name==='graduation'){
-    buildGraduation();
-    document.querySelectorAll('#view-graduation .friend-card').forEach(el=>cardObserver.observe(el));
-  }
+  if(name==='photos')buildPhotoRows();
+  if(name==='videos')buildVideoRows();
+  if(name==='friends')buildFriends();
+  if(name==='graduation')buildGraduation();
 }
 
-/* ── LIGHTBOX ── */
-const lb=document.getElementById('lightbox'), lbImg=document.getElementById('lbImg'), lbVideo=document.getElementById('lbVideo'), lbCounter=document.getElementById('lbCounter');
-let lbItems=[], lbCurrent=0;
+/* =========================================
+   LIGHTBOX
+========================================= */
+
+const lightbox=document.getElementById('lightbox');
+const lbImg=document.getElementById('lbImg');
+const lbVideo=document.getElementById('lbVideo');
+const lbCounter=document.getElementById('lbCounter');
+
+let lbItems=[];
+let lbCurrent=0;
+
 function renderLbItem(){
+  if(!lbItems.length)return;
+
   const item=lbItems[lbCurrent];
+  if(!item||!item.src)return;
+
+  lbVideo.pause();
+  lbVideo.removeAttribute('src');
+  lbVideo.load();
+
+  lbImg.removeAttribute('src');
+  lbImg.style.display='none';
+
   if(item.type==='video'){
-    lbVideo.pause();
     lbVideo.src=item.src;
     lbVideo.style.display='block';
-    lbImg.style.display='none';
     lbVideo.load();
-  } else {
-    lbVideo.pause();
-    lbVideo.removeAttribute('src');
+  }else{
     lbVideo.style.display='none';
     lbImg.style.display='block';
     lbImg.src=item.src;
+
+    lbImg.onerror=()=>{
+      lbImg.alt='This image could not be loaded.';
+    };
   }
-  lbCounter.textContent=(lbCurrent+1)+' / '+lbItems.length;
+
+  lbCounter.textContent=
+    `${lbCurrent+1} / ${lbItems.length}`;
 }
-function openPhotoLb(items, idx){
-  lbItems=items; lbCurrent=idx;
+
+function openPhotoLb(items,index){
+  if(!Array.isArray(items)||!items.length)return;
+
+  const validItems=items.filter(item=>item&&item.src);
+  if(!validItems.length)return;
+
+  lbItems=validItems;
+  lbCurrent=Math.min(
+    Math.max(index,0),
+    lbItems.length-1
+  );
+
   renderLbItem();
-  lb.classList.add('active');
+
+  lightbox.classList.add('active');
+  document.body.style.overflow='hidden';
 }
-function closePhotoLb(){ lb.classList.remove('active'); lbVideo.pause(); }
-function navPhotoLb(dir){
-  lbCurrent=(lbCurrent+dir+lbItems.length)%lbItems.length;
+
+function closePhotoLb(){
+  lightbox.classList.remove('active');
+
+  lbVideo.pause();
+  lbVideo.removeAttribute('src');
+  lbVideo.load();
+
+  document.body.style.overflow='';
+}
+
+function navPhotoLb(direction){
+  if(!lbItems.length)return;
+
+  lbCurrent=(
+    lbCurrent+direction+lbItems.length
+  )%lbItems.length;
+
   renderLbItem();
 }
-document.getElementById('lbClose').addEventListener('click', closePhotoLb);
-lb.addEventListener('click', e=>{ if(e.target===lb) closePhotoLb(); });
-document.getElementById('lbPrev').addEventListener('click', e=>{ e.stopPropagation(); navPhotoLb(-1); });
-document.getElementById('lbNext').addEventListener('click', e=>{ e.stopPropagation(); navPhotoLb(1); });
-let ptx=0;
-lb.addEventListener('touchstart', e=>{ ptx=e.touches[0].clientX; }, {passive:true});
-lb.addEventListener('touchend', e=>{ const dx=e.changedTouches[0].clientX-ptx; if(Math.abs(dx)>50) navPhotoLb(dx<0?1:-1); }, {passive:true});
-document.addEventListener('keydown', e=>{
-  if(lb.classList.contains('active')){
-    if(e.key==='Escape') closePhotoLb();
-    if(e.key==='ArrowLeft') navPhotoLb(-1);
-    if(e.key==='ArrowRight') navPhotoLb(1);
+
+document.getElementById('lbClose').addEventListener(
+  'click',
+  closePhotoLb
+);
+
+lightbox.addEventListener('click',event=>{
+  if(event.target===lightbox){
+    closePhotoLb();
   }
 });
 
-inited.home=true;
+document.getElementById('lbPrev').addEventListener(
+  'click',
+  event=>{
+    event.stopPropagation();
+    navPhotoLb(-1);
+  }
+);
+
+document.getElementById('lbNext').addEventListener(
+  'click',
+  event=>{
+    event.stopPropagation();
+    navPhotoLb(1);
+  }
+);
+
+/* KEYBOARD CONTROLS */
+
+document.addEventListener('keydown',event=>{
+  if(!lightbox.classList.contains('active'))return;
+
+  if(event.key==='Escape')closePhotoLb();
+  if(event.key==='ArrowLeft')navPhotoLb(-1);
+  if(event.key==='ArrowRight')navPhotoLb(1);
+});
+
+/* TOUCH SWIPE */
+
+let touchStartX=0;
+
+lightbox.addEventListener('touchstart',event=>{
+  touchStartX=event.touches[0].clientX;
+},{passive:true});
+
+lightbox.addEventListener('touchend',event=>{
+  const touchEndX=event.changedTouches[0].clientX;
+  const difference=touchEndX-touchStartX;
+
+  if(Math.abs(difference)>50){
+    navPhotoLb(difference<0?1:-1);
+  }
+},{passive:true});
+
+/* =========================================
+   START HOME PAGE
+========================================= */
+
 buildHighlights();
 
-/* ── BACKGROUND MUSIC ── */
-(function () {
-  const STORAGE_KEY = "bgAudioStateRP";
-  function pickStore() {
-    try { localStorage.setItem("__t__","1"); localStorage.removeItem("__t__"); return localStorage; } catch(e){}
-    try { sessionStorage.setItem("__t__","1"); sessionStorage.removeItem("__t__"); return sessionStorage; } catch(e){}
+/* =========================================
+   BACKGROUND MUSIC PLAYER
+========================================= */
+
+(function(){
+
+  const STORAGE_KEY='bgAudioStateRP';
+
+  const audio=document.getElementById('bgAudio');
+  const playButton=document.getElementById('playBtn');
+  const playIcon=document.getElementById('playIcon');
+  const player=document.getElementById('player');
+  const label=player?.querySelector('.player-label');
+
+  if(!audio)return;
+
+  const defaultLabel=label?.textContent||'Theme';
+
+  function getStorage(){
+    try{
+      localStorage.setItem('__test__','1');
+      localStorage.removeItem('__test__');
+      return localStorage;
+    }catch(error){}
+
+    try{
+      sessionStorage.setItem('__test__','1');
+      sessionStorage.removeItem('__test__');
+      return sessionStorage;
+    }catch(error){}
+
     return null;
   }
-  const store = pickStore();
-  function readState(){ if(!store) return null; try{ const r=store.getItem(STORAGE_KEY); return r?JSON.parse(r):null; }catch(e){ return null; } }
-  function writeState(s){ if(!store) return; try{ store.setItem(STORAGE_KEY, JSON.stringify(s)); }catch(e){} }
 
-  const audio=document.getElementById("bgAudio");
-  const playBtn=document.getElementById("playBtn");
-  const playIcon=document.getElementById("playIcon");
-  const playerEl=document.getElementById("player");
-  const label=playerEl?playerEl.querySelector(".player-label"):null;
-  const defaultLabel=label?label.textContent:"";
-  function setUI(p){ if(playIcon) playIcon.className=p?"bi bi-pause-fill":"bi bi-play-fill"; if(playerEl) playerEl.classList.toggle("playing",p); }
-  function errLabel(t){ if(label){ label.textContent=t; label.style.color="#e07b7b"; } }
-  if(!audio) return;
+  const storage=getStorage();
 
-  audio.addEventListener("error",()=>{
-    const err=audio.error;
-    const msgs={1:"Audio load aborted",2:"Network error loading audio",3:"Audio file can't be decoded",4:"Audio file not found"};
-    errLabel(err?(msgs[err.code]||"Audio error"):"Audio error");
-  });
-  if(playBtn){ playBtn.addEventListener("click",()=>{
-    if(audio.paused){
-      audio.play().then(()=>setUI(true)).catch(()=>{ setUI(false); if(label&&label.textContent===defaultLabel) errLabel("Tap again to allow audio"); });
-    } else { audio.pause(); setUI(false); }
-  }); }
-  audio.addEventListener("play",()=>setUI(true));
-  audio.addEventListener("pause",()=>setUI(false));
+  function readState(){
+    if(!storage)return null;
 
-  try{
-    const saved=readState(); let resumed=false;
-    if(saved && typeof saved.time==="number"){
-      const seek=()=>{ if(audio.readyState>=1) audio.currentTime=saved.time; else audio.addEventListener("loadedmetadata",()=>{audio.currentTime=saved.time;},{once:true}); };
-      seek();
-      if(saved.playing) audio.play().then(()=>{resumed=true;}).catch(()=>{});
+    try{
+      return JSON.parse(storage.getItem(STORAGE_KEY));
+    }catch(error){
+      return null;
     }
-    function cleanup(){ document.removeEventListener("click",unlock); document.removeEventListener("keydown",unlock); document.removeEventListener("touchstart",unlock); }
-    function unlock(){ if(resumed||audio.paused===false){cleanup();return;} const s=readState(); if(s&&s.playing&&audio.paused) audio.play().catch(()=>{}); cleanup(); }
-    document.addEventListener("click",unlock); document.addEventListener("keydown",unlock); document.addEventListener("touchstart",unlock);
-    setInterval(()=>{ writeState({time:audio.currentTime||0, playing:!audio.paused}); },1000);
-    window.addEventListener("beforeunload",()=>{ writeState({time:audio.currentTime||0, playing:!audio.paused}); });
-  }catch(e){}
+  }
+
+  function saveState(){
+    if(!storage)return;
+
+    try{
+      storage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({
+          time:audio.currentTime||0,
+          playing:!audio.paused
+        })
+      );
+    }catch(error){}
+  }
+
+  function updatePlayer(isPlaying){
+    if(playIcon){
+      playIcon.className=isPlaying
+        ?'bi bi-pause-fill'
+        :'bi bi-play-fill';
+    }
+
+    if(player){
+      player.classList.toggle('playing',isPlaying);
+    }
+  }
+
+  function showAudioError(message){
+    if(!label)return;
+
+    label.textContent=message;
+    label.style.color='#e07b7b';
+  }
+
+  audio.addEventListener('play',()=>{
+    updatePlayer(true);
+  });
+
+  audio.addEventListener('pause',()=>{
+    updatePlayer(false);
+  });
+
+  audio.addEventListener('error',()=>{
+    const messages={
+      1:'Audio loading stopped',
+      2:'Audio network error',
+      3:'Audio cannot play',
+      4:'Audio file not found'
+    };
+
+    showAudioError(
+      messages[audio.error?.code]||'Audio error'
+    );
+
+    updatePlayer(false);
+  });
+
+  playButton?.addEventListener('click',()=>{
+    if(audio.paused){
+      audio.play().then(()=>{
+        updatePlayer(true);
+
+        if(label){
+          label.textContent=defaultLabel;
+          label.style.color='';
+        }
+      }).catch(()=>{
+        updatePlayer(false);
+        showAudioError('Tap again to play');
+      });
+    }else{
+      audio.pause();
+      updatePlayer(false);
+    }
+  });
+
+  /* RESTORE SAVED POSITION */
+
+  const saved=readState();
+
+  if(saved&&typeof saved.time==='number'){
+    const restorePosition=()=>{
+      if(Number.isFinite(audio.duration)){
+        audio.currentTime=Math.min(
+          saved.time,
+          Math.max(0,audio.duration-1)
+        );
+      }
+    };
+
+    if(audio.readyState>=1){
+      restorePosition();
+    }else{
+      audio.addEventListener(
+        'loadedmetadata',
+        restorePosition,
+        {once:true}
+      );
+    }
+
+    if(saved.playing){
+      audio.play().catch(()=>{
+        // The visitor may need to press play manually.
+      });
+    }
+  }
+
+  /* SAVE PLAYBACK POSITION */
+
+  const saveInterval=window.setInterval(saveState,2000);
+
+  window.addEventListener('beforeunload',()=>{
+    saveState();
+    window.clearInterval(saveInterval);
+  });
+
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden)saveState();
+  });
+
 })();
+
 </script>
+
 </body>
 </html>
